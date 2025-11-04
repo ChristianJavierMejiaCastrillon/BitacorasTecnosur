@@ -1,0 +1,74 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="BitacorasWeb.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%: Page.Title %> - Sistema de Bitácoras Tecnosur</title>
+
+    <!-- Bootstrap para compatibilidad móvil y PC -->
+    <link href="<%: ResolveUrl("~/Content/bootstrap.min.css") %>" rel="stylesheet" />
+
+    <!-- Mi hoja de estilos personalizados -->
+    <link href="<%: ResolveUrl("~/Content/styles.css") %>?v=1" rel="stylesheet" />
+</head>
+<body>
+    <form runat="server">
+
+        <!-- Scripts de ASP.NET -->
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+            </Scripts>
+        </asp:ScriptManager>
+
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-sm navbar-dark --tq-azul">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" runat="server" href="~/Home.aspx">
+                    <img src="<%: ResolveUrl("~/Content/img/logoTq.png") %>"
+                        alt="TQ"
+                        style="height: 50px; width: 50px; border-radius: 50%; margin-right: 8px;" />
+                    <span>Bitácoras Tecnosur</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navMenu">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!--li class="nav-item"><a class="nav-link" runat="server" href="~/Home.aspx">Inicio</a></!--li-->
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Registro.aspx">Registro</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Reportes.aspx">Reportes</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Login.aspx">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="container mt-4">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+            <hr />
+            <footer class="text-center text-muted py-3">
+                <p>&copy; <%: DateTime.Now.Year %> - Sistema de Bitácoras Tecnosur</p>
+            </footer>
+        </div>
+
+        <!-- Scripts principales -->
+        <script src="<%: ResolveUrl("~/Scripts/jquery-3.7.0.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/bootstrap.bundle.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/app.js") %>"></script>
+    </form>
+</body>
+</html>

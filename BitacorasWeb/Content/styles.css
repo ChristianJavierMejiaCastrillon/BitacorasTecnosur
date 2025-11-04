@@ -1,0 +1,143 @@
+﻿/* ===============================
+   Paleta y estilos personalizados Tecnosur / TQ
+   =============================== */
+
+/* --- Variables de color (ajustables según manual corporativo) --- */
+:root {
+    --tq-azul: #1e88e5; /* Azul corporativo principal */
+    --tq-azul-claro: #1e88e5; /* Azul hover o complementario */
+    --tq-gris-fondo: #f4f6f8; /* Fondo gris claro */
+}
+
+/* --- Fondo general --- */
+body {
+    background-color: var(--tq-gris-fondo);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Navbar --- */
+.navbar {
+    background-color: var(--tq-azul) !important;
+}
+
+    /* Color de texto más claro tipo TQ */
+    .navbar .navbar-brand,
+    .navbar .nav-link {
+        color: #27A3F5 !important; /* Azul claro institucional */
+        font-weight: 600;
+        text-shadow: none;
+        transition: color 0.3s ease;
+    }
+
+        /* Hover y activo un tono aún más claro */
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: #27A3F5 !important;
+            text-decoration: none;
+        }
+
+/* --- Botones --- */
+.btn-primary {
+    background-color: var(--tq-azul);
+    border-color: var(--tq-azul);
+}
+
+    .btn-primary:hover {
+        background-color: var(--tq-azul-claro);
+        border-color: var(--tq-azul-claro);
+    }
+
+/* --- Títulos --- */
+h1, h2, h3 {
+    color: var(--tq-azul);
+}
+
+/* Centrado de títulos dentro de los formularios 
+.form-container h2 {
+    text-align: center;
+    color: var(--tq-azul);
+    font-weight: 500;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--tq-azul-claro);
+    padding-bottom: 8px;
+}*/
+
+/* --- Footer --- */
+footer {
+    color: #6c757d;
+    text-align: center;
+}
+
+/* --- Formularios y contenedores --- */
+.container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Enlaces --- */
+a {
+    color: var(--tq-azul);
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* --- Logo navbar (si se usa imagen) --- */
+.navbar-brand img {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+/* --- Logo y marca navbar --- */
+.navbar-brand img {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    margin-right: 8px;
+    object-fit: cover;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand span {
+    color: #27A3F5;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* --- Formularios centrados (Login, Registro, etc.) --- */
+.form-container {
+    max-width: 400px; /* ancho máximo del formulario */
+    margin: 0 auto; /* centra horizontalmente */
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .form-container .form-label {
+        font-weight: 500;
+        color: var(--tq-azul);
+    }
+
+    .form-container .btn {
+        width: 100%;
+    }
+
+/* --- Línea separadora antes del footer --- */
+.container hr {
+    border: none; /* elimina el estilo predeterminado */
+    border-top: 1px solid #d0d7de; /* color gris suave */
+    width: 80%; /* define el largo (porcentaje del ancho del contenedor) */
+    margin: 30px auto 10px auto; /* centra horizontalmente con márgenes arriba/abajo */
+    opacity: 0.6; /* suaviza visualmente */
+}
+
+/* --- Encabezado del formulario mas corporativo --- */
+
