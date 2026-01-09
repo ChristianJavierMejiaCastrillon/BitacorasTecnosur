@@ -16,13 +16,14 @@ namespace BitacorasWeb
             {
                 CargarOperarios();
                 CargarMaquinas();
-                CargarProductos(); 
+                CargarProductos();
+                CargarTurnos();
             }
         }
 
         private void CargarOperarios()
         {
-            var dal = new BitacorasWeb.Datos.UsuarioDAL();
+            var dal = new UsuarioDAL();
 
             ddlOperario.DataSource = dal.ListarUsuariosParaDropdown();
             ddlOperario.DataTextField = "NombreCompleto";
@@ -33,7 +34,7 @@ namespace BitacorasWeb
 
         private void CargarMaquinas()
         {
-            var dal = new BitacorasWeb.Datos.MaquinaDAL();
+            var dal = new MaquinaDAL();
             ddlMaquina.DataSource = dal.ListarMaquinasParaDropdown();
             ddlMaquina.DataTextField = "Nombre";
             ddlMaquina.DataValueField = "IdMaquina";
@@ -50,6 +51,16 @@ namespace BitacorasWeb
             ddlProducto.DataBind();
 
             ddlProducto.Items.Insert(0, new ListItem("Seleccione...", "0"));
+        }
+
+        private void CargarTurnos()
+        {
+            var dal = new TurnoDAL();
+            ddlTurno.DataSource = dal.ListarTurnosParaDropDown();
+            ddlTurno.DataTextField = "Texto";
+            ddlTurno.DataValueField = "valor";
+            ddlTurno.DataBind();
+            ddlTurno.Items.Insert(0, new ListItem("Seleccione...", "0"));
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)

@@ -22,19 +22,18 @@
             <div class="col-md-6">
                 <label for="ddlTurno" class="form-label">Turno</label>
                 <asp:DropDownList ID="ddlTurno" runat="server" CssClass="form-select">
-                    <asp:ListItem Text="Seleccione..." Value="" />
-                    <asp:ListItem>Turno 1</asp:ListItem>
-                    <asp:ListItem>Turno 2</asp:ListItem>
-                    <asp:ListItem>Turno 3</asp:ListItem>
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="ddlTurno"
-                    InitialValue="" ErrorMessage="Selecciona el turno" CssClass="text-danger" Display="Dynamic" />
+
+                <asp:RequiredFieldValidator runat="server" 
+                    ControlToValidate="ddlTurno"
+                    InitialValue="0" 
+                    ErrorMessage="Selecciona el turno" 
+                    CssClass="text-danger" Display="Dynamic" />
             </div>
 
             <!-- Máquina -->
             <div class="col-md-6">
                 <label for="ddlMaquina" class="form-label">Máquina</label>
-
                 <asp:DropDownList ID="ddlMaquina" runat="server" CssClass="form-select">
                 </asp:DropDownList>
 
