@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BitacorasWeb.Datos;
 
 namespace BitacorasWeb
 {
@@ -15,6 +16,7 @@ namespace BitacorasWeb
             {
                 CargarOperarios();
                 CargarMaquinas();
+                CargarProductos(); 
             }
         }
 
@@ -26,7 +28,7 @@ namespace BitacorasWeb
             ddlOperario.DataTextField = "NombreCompleto";
             ddlOperario.DataValueField = "IdUsuario";
             ddlOperario.DataBind();
-            ddlOperario.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione...", "0"));
+            ddlOperario.Items.Insert(0, new ListItem("Seleccione...", "0"));
         }
 
         private void CargarMaquinas()
@@ -36,7 +38,18 @@ namespace BitacorasWeb
             ddlMaquina.DataTextField = "Nombre";
             ddlMaquina.DataValueField = "IdMaquina";
             ddlMaquina.DataBind();
-            ddlMaquina.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione...", "0"));
+            ddlMaquina.Items.Insert(0, new ListItem("Seleccione...", "0"));
+        }
+
+        private void CargarProductos()
+        {
+            var dal = new ProductoDAL();
+            ddlProducto.DataSource = dal.ListarProductosParaDropdown();
+            ddlProducto.DataTextField = "Nombre";
+            ddlProducto.DataValueField = "IdProducto";
+            ddlProducto.DataBind();
+
+            ddlProducto.Items.Insert(0, new ListItem("Seleccione...", "0"));
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)

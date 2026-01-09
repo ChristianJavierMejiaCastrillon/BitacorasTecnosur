@@ -49,13 +49,13 @@
             <div class="col-md-6">
                 <label for="ddlProducto" class="form-label">Producto</label>
                 <asp:DropDownList ID="ddlProducto" runat="server" CssClass="form-select">
-                    <asp:ListItem Text="Seleccione..." Value="" />
-                    <asp:ListItem>Producto A</asp:ListItem>
-                    <asp:ListItem>Producto B</asp:ListItem>
-                    <asp:ListItem>Producto C</asp:ListItem>
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="ddlProducto"
-                    InitialValue="" ErrorMessage="Selecciona el producto" CssClass="text-danger" Display="Dynamic" />
+
+                <asp:RequiredFieldValidator runat="server"
+                    ControlToValidate="ddlProducto"
+                    InitialValue="0" 
+                    ErrorMessage="Selecciona el producto" 
+                    CssClass="text-danger" Display="Dynamic" />
             </div>
 
             <!-- Operario -->
@@ -68,7 +68,8 @@
                 <asp:RequiredFieldValidator runat="server" 
                     ControlToValidate="ddlOperario"
                     InitialValue="0"
-                    ErrorMessage="El operario es obligatorio" CssClass="text-danger" Display="Dynamic" />
+                    ErrorMessage="El operario es obligatorio" 
+                    CssClass="text-danger" Display="Dynamic" />
             </div>
 
             <!-- Tipo de novedad -->
