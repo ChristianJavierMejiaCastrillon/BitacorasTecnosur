@@ -14,6 +14,7 @@ namespace BitacorasWeb
             if (!IsPostBack)
             {
                 CargarOperarios();
+                CargarMaquinas();
             }
         }
 
@@ -25,8 +26,17 @@ namespace BitacorasWeb
             ddlOperario.DataTextField = "NombreCompleto";
             ddlOperario.DataValueField = "IdUsuario";
             ddlOperario.DataBind();
-
             ddlOperario.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione...", "0"));
+        }
+
+        private void CargarMaquinas()
+        {
+            var dal = new BitacorasWeb.Datos.MaquinaDAL();
+            ddlMaquina.DataSource = dal.ListarMaquinasParaDropdown();
+            ddlMaquina.DataTextField = "Nombre";
+            ddlMaquina.DataValueField = "IdMaquina";
+            ddlMaquina.DataBind();
+            ddlMaquina.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione...", "0"));
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)

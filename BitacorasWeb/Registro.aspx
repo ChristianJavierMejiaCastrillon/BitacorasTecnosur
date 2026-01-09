@@ -34,14 +34,14 @@
             <!-- Máquina -->
             <div class="col-md-6">
                 <label for="ddlMaquina" class="form-label">Máquina</label>
+
                 <asp:DropDownList ID="ddlMaquina" runat="server" CssClass="form-select">
-                    <asp:ListItem Text="Seleccione..." Value="" />
-                    <asp:ListItem>Laminadora 1</asp:ListItem>
-                    <asp:ListItem>Empacadora MK-200</asp:ListItem>
-                    <asp:ListItem>Selladora ZX-5</asp:ListItem>
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="ddlMaquina"
-                    InitialValue="" ErrorMessage="Selecciona la máquina"
+
+                <asp:RequiredFieldValidator runat="server" 
+                    ControlToValidate="ddlMaquina"
+                    InitialValue="0" 
+                    ErrorMessage="Selecciona la máquina"
                     CssClass="text-danger" Display="Dynamic" />
             </div>
 
