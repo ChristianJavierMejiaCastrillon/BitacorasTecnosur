@@ -75,14 +75,13 @@
             <div class="col-md-6">
                 <label for="ddlTipo" class="form-label">Tipo de novedad</label>
                 <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-select">
-                    <asp:ListItem Text="Seleccione..." Value="" />
-                    <asp:ListItem>Calidad</asp:ListItem>
-                    <asp:ListItem>Producción</asp:ListItem>
-                    <asp:ListItem>Mantenimiento</asp:ListItem>
-                    <asp:ListItem>Seguridad</asp:ListItem>
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="ddlTipo"
-                    InitialValue="" ErrorMessage="Selecciona el tipo de novedad" CssClass="text-danger" Display="Dynamic" />
+
+                <asp:RequiredFieldValidator runat="server" 
+                    ControlToValidate="ddlTipo"
+                    InitialValue="" 
+                    ErrorMessage="Selecciona el tipo de novedad" 
+                    CssClass="text-danger" Display="Dynamic" />
             </div>
 
             <!-- Descripción -->

@@ -188,6 +188,7 @@
     <Compile Include="Datos\ConexionBD.cs" />
     <Compile Include="Datos\MaquinaDAL.cs" />
     <Compile Include="Datos\ProductoDAL.cs" />
+    <Compile Include="Datos\TipoNovedadDAL.cs" />
     <Compile Include="Datos\TurnoDAL.cs" />
     <Compile Include="Datos\UsuarioDAL.cs" />
     <Compile Include="Global.asax.cs">

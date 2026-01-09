@@ -18,6 +18,7 @@ namespace BitacorasWeb
                 CargarMaquinas();
                 CargarProductos();
                 CargarTurnos();
+                CargarTiposNovedad();
             }
         }
 
@@ -61,6 +62,16 @@ namespace BitacorasWeb
             ddlTurno.DataValueField = "valor";
             ddlTurno.DataBind();
             ddlTurno.Items.Insert(0, new ListItem("Seleccione...", "0"));
+        }
+
+        private void CargarTiposNovedad()
+        {
+            var dal = new TipoNovedadDAL();
+            ddlTipo.DataSource = dal.ListarTiposParaDropdown();
+            ddlTipo.DataTextField = "Texto";
+            ddlTipo.DataValueField = "valor";
+            ddlTipo.DataBind();
+            ddlTipo.Items.Insert(0, new ListItem("Seleccione...", "0"));
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
