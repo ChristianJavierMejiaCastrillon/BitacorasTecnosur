@@ -1,0 +1,7 @@
+-- TABLA: Rol
+CREATE TABLE Rol (
+    IdRol INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre NVARCHAR(50) NOT NULL,
+    Descripcion NVARCHAR(200) NULL
+);
+GO

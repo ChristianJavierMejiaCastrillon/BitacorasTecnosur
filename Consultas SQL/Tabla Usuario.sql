@@ -1,0 +1,11 @@
+-- TABLA: Usuario
+CREATE TABLE Usuario (
+    IdUsuario INT IDENTITY(1,1) PRIMARY KEY,
+    Nombres NVARCHAR(100) NOT NULL,
+    Apellidos NVARCHAR(100) NOT NULL,
+    IdRol INT NOT NULL,
+    Activo BIT NOT NULL DEFAULT 1,
+    CONSTRAINT FK_Usuario_Rol FOREIGN KEY (IdRol)
+        REFERENCES Rol (IdRol)
+);
+GO
