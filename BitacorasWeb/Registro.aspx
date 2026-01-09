@@ -60,9 +60,14 @@
 
             <!-- Operario -->
             <div class="col-md-6">
-                <label for="txtOperario" class="form-label">Operario</label>
-                <asp:TextBox ID="txtOperario" runat="server" CssClass="form-control" />
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtOperario"
+                <label for="ddlOperario" class="form-label">Operario</label>
+
+                <asp:DropDownList ID="ddlOperario" runat="server" CssClass="form-select">
+                </asp:DropDownList>
+
+                <asp:RequiredFieldValidator runat="server" 
+                    ControlToValidate="ddlOperario"
+                    InitialValue="0"
                     ErrorMessage="El operario es obligatorio" CssClass="text-danger" Display="Dynamic" />
             </div>
 

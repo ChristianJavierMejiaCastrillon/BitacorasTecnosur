@@ -13,8 +13,20 @@ namespace BitacorasWeb
         {
             if (!IsPostBack)
             {
-                // Aquí más adelante podrás cargar listas desde BD (Línea, Producto, etc.)
+                CargarOperarios();
             }
+        }
+
+        private void CargarOperarios()
+        {
+            var dal = new BitacorasWeb.Datos.UsuarioDAL();
+
+            ddlOperario.DataSource = dal.ListarUsuariosParaDropdown();
+            ddlOperario.DataTextField = "NombreCompleto";
+            ddlOperario.DataValueField = "IdUsuario";
+            ddlOperario.DataBind();
+
+            ddlOperario.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione...", "0"));
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -43,7 +55,6 @@ namespace BitacorasWeb
             ddlTurno.SelectedIndex = 0;
             ddlMaquina.SelectedIndex = 0;
             ddlProducto.SelectedIndex = 0;
-            txtOperario.Text = "";
             ddlTipo.SelectedIndex = 0;
             txtDescripcion.Text = "";
         }
