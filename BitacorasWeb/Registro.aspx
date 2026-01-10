@@ -24,10 +24,10 @@
                 <asp:DropDownList ID="ddlTurno" runat="server" CssClass="form-select">
                 </asp:DropDownList>
 
-                <asp:RequiredFieldValidator runat="server" 
+                <asp:RequiredFieldValidator runat="server"
                     ControlToValidate="ddlTurno"
-                    InitialValue="0" 
-                    ErrorMessage="Selecciona el turno" 
+                    InitialValue="0"
+                    ErrorMessage="Selecciona el turno"
                     CssClass="text-danger" Display="Dynamic" />
             </div>
 
@@ -37,9 +37,9 @@
                 <asp:DropDownList ID="ddlMaquina" runat="server" CssClass="form-select">
                 </asp:DropDownList>
 
-                <asp:RequiredFieldValidator runat="server" 
+                <asp:RequiredFieldValidator runat="server"
                     ControlToValidate="ddlMaquina"
-                    InitialValue="0" 
+                    InitialValue="0"
                     ErrorMessage="Selecciona la máquina"
                     CssClass="text-danger" Display="Dynamic" />
             </div>
@@ -52,8 +52,8 @@
 
                 <asp:RequiredFieldValidator runat="server"
                     ControlToValidate="ddlProducto"
-                    InitialValue="0" 
-                    ErrorMessage="Selecciona el producto" 
+                    InitialValue="0"
+                    ErrorMessage="Selecciona el producto"
                     CssClass="text-danger" Display="Dynamic" />
             </div>
 
@@ -64,10 +64,10 @@
                 <asp:DropDownList ID="ddlOperario" runat="server" CssClass="form-select">
                 </asp:DropDownList>
 
-                <asp:RequiredFieldValidator runat="server" 
+                <asp:RequiredFieldValidator runat="server"
                     ControlToValidate="ddlOperario"
                     InitialValue="0"
-                    ErrorMessage="El operario es obligatorio" 
+                    ErrorMessage="El operario es obligatorio"
                     CssClass="text-danger" Display="Dynamic" />
             </div>
 
@@ -77,10 +77,10 @@
                 <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-select">
                 </asp:DropDownList>
 
-                <asp:RequiredFieldValidator runat="server" 
+                <asp:RequiredFieldValidator runat="server"
                     ControlToValidate="ddlTipo"
-                    InitialValue="" 
-                    ErrorMessage="Selecciona el tipo de novedad" 
+                    InitialValue="0"
+                    ErrorMessage="Selecciona el tipo de novedad"
                     CssClass="text-danger" Display="Dynamic" />
             </div>
 
@@ -99,6 +99,12 @@
                 <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" CssClass="btn btn-outline-secondary"
                     CausesValidation="False" OnClick="btnLimpiar_Click" />
             </div>
+
+            <!-- Mensaje -->
+            <div class="col-12 mt-3">
+                <asp:Label ID="lblMensaje" runat="server" EnableViewState="false"></asp:Label>
+            </div>
+
         </div>
     </div>
 </asp:Content>

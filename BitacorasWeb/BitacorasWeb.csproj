@@ -185,8 +185,10 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Datos\BitacoraDAL.cs" />
     <Compile Include="Datos\ConexionBD.cs" />
     <Compile Include="Datos\MaquinaDAL.cs" />
+    <Compile Include="Datos\NovedadDAL.cs" />
     <Compile Include="Datos\ProductoDAL.cs" />
     <Compile Include="Datos\TipoNovedadDAL.cs" />
     <Compile Include="Datos\TurnoDAL.cs" />

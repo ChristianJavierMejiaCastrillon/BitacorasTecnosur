@@ -76,20 +76,49 @@ namespace BitacorasWeb
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
-            {
-                // TODO: Guardar en BD (pronto)
-                // Por ahora, mostramos un aviso simple:
-                ClientScript.RegisterStartupScript(GetType(), "ok",
-                    "alert('Novedad registrada correctamente (demo).');", true);
+            lblMensaje.Text = "";
 
+            if (!Page.IsValid)
+            {
+                lblMensaje.Text = "<span class='text-danger'>❌ Revisa los campos obligatorios.</span>";
+                return;
+            }
+
+            try
+            {
+                // 1) Leer valores del formulario
+                DateTime fecha = DateTime.Parse(txtFecha.Text);
+                string turno = ddlTurno.SelectedValue;
+
+                int idUsuario = int.Parse(ddlOperario.SelectedValue);
+                int idMaquina = int.Parse(ddlMaquina.SelectedValue);
+                int idProducto = int.Parse(ddlProducto.SelectedValue);
+
+                string tipoNovedad = ddlTipo.SelectedValue;
+                string descripcion = txtDescripcion.Text.Trim();
+
+                // 2) Crear Bitácora
+                var bitacoraDal = new BitacoraDAL();
+                int idBitacora = bitacoraDal.CrearBitacora(fecha, turno, idMaquina, idUsuario);
+
+                // 3) Insertar Novedad
+                var novedadDal = new NovedadDAL();
+                novedadDal.InsertarNovedad(idBitacora, idProducto, tipoNovedad, descripcion, null);
+
+                // 4) Mensaje OK + limpiar
+                lblMensaje.Text = "<span class='text-success'>✅ Novedad guardada correctamente.</span>";
                 LimpiarFormulario();
+            }
+            catch (Exception ex)
+            {
+                lblMensaje.Text = "<span class='text-danger'>❌ Error al guardar: " + ex.Message + "</span>";
             }
         }
 
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
+            lblMensaje.Text = "";
             LimpiarFormulario();
 
         }
@@ -97,11 +126,13 @@ namespace BitacorasWeb
         private void LimpiarFormulario()
         {
             txtFecha.Text = "";
-            ddlTurno.SelectedIndex = 0;
-            ddlMaquina.SelectedIndex = 0;
-            ddlProducto.SelectedIndex = 0;
-            ddlTipo.SelectedIndex = 0;
             txtDescripcion.Text = "";
+
+            ddlTurno.SelectedValue = "0";
+            ddlOperario.SelectedValue = "0";
+            ddlMaquina.SelectedValue = "0";
+            ddlProducto.SelectedValue = "0";
+            ddlTipo.SelectedValue = "0";
         }
     }
 }
