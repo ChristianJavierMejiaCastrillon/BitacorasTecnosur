@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BitacorasWeb.Datos;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,93 +15,75 @@ namespace BitacorasWeb
         {
             if (!IsPostBack)
             {
-                // Datos demo iniciales
-                BindGrid(DatosDemo());
+                CargarTurnos();
+                CargarMaquinas();
+                CargarResultados(); 
             }
+        }
+
+        private void CargarTurnos()
+        {
+            var turnoDal = new TurnoDAL();
+            ddlTurno.DataSource = turnoDal.ListarTurnosParaDropDown();
+            ddlTurno.DataTextField = "Texto";
+            ddlTurno.DataValueField = "Valor";
+            ddlTurno.DataBind();
+            ddlTurno.Items.Insert(0, new ListItem("Todos", "0"));
+        }
+
+        private void CargarMaquinas()
+        {
+            var maquinaDal = new MaquinaDAL();
+            ddlMaquina.DataSource = maquinaDal.ListarMaquinasParaDropdown();
+            ddlMaquina.DataTextField = "Nombre";
+            ddlMaquina.DataValueField = "IdMaquina";
+            ddlMaquina.DataBind();
+            ddlMaquina.Items.Insert(0, new ListItem("Todas", "0"));
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-            var dt = DatosDemo();
+            CargarResultados();
+        }
 
-            // filtros simples en memoria (luego serán SQL WHERE)
-            if (!string.IsNullOrWhiteSpace(txtFiltroFecha.Text))
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtFecha.Text = "";
+            ddlTurno.SelectedValue = "0";
+            ddlMaquina.SelectedValue = "0";
+            lblMensaje.Text = "";
+            CargarResultados();
+        }
+
+        private void CargarResultados()
+        {
+            try
             {
-                DateTime f;
-                if (DateTime.TryParse(txtFiltroFecha.Text, out f))
+                DateTime? fecha = null;
+                if (!string.IsNullOrWhiteSpace(txtFecha.Text))
                 {
-                    dt = dt.AsEnumerable()
-                           .Where(r => Convert.ToDateTime(r["Fecha"]).Date == f.Date)
-                           .CopyToDataTableOrEmpty(dt);
+                    fecha = DateTime.Parse(txtFecha.Text);
                 }
-            }
 
-            if (!string.IsNullOrWhiteSpace(ddlFiltroTurno.SelectedValue))
+                string turno = ddlTurno.SelectedValue;
+
+                int? idMaquina = null;
+                int maquinaSeleccionada = int.Parse(ddlMaquina.SelectedValue);
+                if (maquinaSeleccionada > 0)
+                {
+                    idMaquina = maquinaSeleccionada;
+                }
+
+                var dal = new ReporteNovedadesDAL();
+                var resultados = dal.BuscarNovedades(fecha, turno, idMaquina);
+
+                gvNovedades.DataSource = resultados;
+                gvNovedades.DataBind();
+            }
+            catch (Exception ex)
             {
-                dt = dt.AsEnumerable()
-                       .Where(r => r["Turno"].ToString() == ddlFiltroTurno.SelectedValue)
-                       .CopyToDataTableOrEmpty(dt);
+                lblMensaje.Text = "<span class='text-danger'>❌ Error cargando reportes: " + ex.Message + "</span>";
             }
-
-            if (!string.IsNullOrWhiteSpace(ddlFiltroMaquina.SelectedValue))
-            {
-                dt = dt.AsEnumerable()
-                       .Where(r => r["Maquina"].ToString() == ddlFiltroMaquina.SelectedValue)
-                       .CopyToDataTableOrEmpty(dt);
-            }
-
-            BindGrid(dt);
-        }
-
-        protected void btnLimpiarFiltros_Click(object sender, EventArgs e)
-        {
-            txtFiltroFecha.Text = "";
-            ddlFiltroTurno.SelectedIndex = 0;
-            ddlFiltroMaquina.SelectedIndex = 0;
-            BindGrid(DatosDemo());
-        }
-
-        protected void gvNovedades_PageIndexChanging(object sender, System.Web.UI.WebControls.GridViewPageEventArgs e)
-        {
-            gvNovedades.PageIndex = e.NewPageIndex;
-            // Rebind (en real se guardan filtros/resultado en sesión o se consulta otra vez)
-            BindGrid(DatosDemo());
-        }
-
-        private void BindGrid(DataTable dt)
-        {
-            gvNovedades.DataSource = dt;
-            gvNovedades.DataBind();
-        }
-
-        // ====== Datos de ejemplo (mientras conectamos la BD) ======
-        private DataTable DatosDemo()
-        {
-            var dt = new DataTable();
-            dt.Columns.Add("Fecha", typeof(DateTime));
-            dt.Columns.Add("Turno", typeof(string));
-            dt.Columns.Add("Maquina", typeof(string));
-            dt.Columns.Add("Producto", typeof(string));
-            dt.Columns.Add("Tipo", typeof(string));
-            dt.Columns.Add("Descripcion", typeof(string));
-
-            dt.Rows.Add(DateTime.Today, "Turno1", "Laminadora 1", "Producto A", "Calidad", "Desalineación leve");
-            dt.Rows.Add(DateTime.Today, "Turno 2", "Selladora ZX-5", "Producto B", "Producción", "Parada por ajuste");
-            dt.Rows.Add(DateTime.Today.AddDays(-1), "Turno3", "Empacadora MK-200", "Producto C", "Mantenimiento", "Cambio de banda");
-            dt.Rows.Add(DateTime.Today.AddDays(-2), "Turno1", "Laminadora 1", "Producto A", "Seguridad", "Derrame controlado");
-
-            return dt;
-        }
-    }
-
-        // Helper para LINQ -> DataTable vacío si no hay filas
-    public static class DataTableExtensions
-    {
-        public static DataTable CopyToDataTableOrEmpty(this EnumerableRowCollection<DataRow> rows, DataTable schemaSource)
-        {
-            var result = schemaSource.Clone();
-            foreach (var r in rows) result.ImportRow(r);
-            return result;
         }
     }
 }
