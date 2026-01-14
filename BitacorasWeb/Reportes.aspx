@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Reportes.aspx.cs" Inherits="BitacorasWeb.Reportes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
- <div class="container mt-4">
+    <div class="container mt-4">
         <div class="card shadow-sm p-4">
 
-            <h2 class="mb-4" style="color:#0d6efd;">Reportes de Novedades</h2>
+            <h2 class="mb-4" style="color: #0d6efd;">Reportes de Novedades</h2>
 
             <asp:Label ID="lblMensaje" runat="server" EnableViewState="false"></asp:Label>
 
@@ -46,6 +46,8 @@
             <asp:GridView ID="gvNovedades" runat="server" CssClass="table table-striped table-bordered"
                 AutoGenerateColumns="false" EmptyDataText="No hay novedades para los filtros seleccionados.">
                 <Columns>
+                    <asp:BoundField DataField="FechaHoraRegistro" HeaderText="Fecha/Hora"
+                        DataFormatString="{0:yyyy-MM-dd HH:mm}" />
                     <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:yyyy-MM-dd}" />
                     <asp:BoundField DataField="Turno" HeaderText="Turno" />
                     <asp:BoundField DataField="Maquina" HeaderText="Máquina" />

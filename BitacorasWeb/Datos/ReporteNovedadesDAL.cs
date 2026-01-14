@@ -87,6 +87,7 @@ namespace BitacorasWeb.Datos
         public class NovedadReporteItem
         {
             public int IdNovedad { get; set; }
+            public DateTime FechaHoraRegistro { get; set; }
             public DateTime Fecha { get; set; }
             public string Turno { get; set; }
             public string Maquina { get; set; }

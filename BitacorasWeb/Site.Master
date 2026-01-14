@@ -40,7 +40,7 @@
                     <img src="<%: ResolveUrl("~/Content/img/logoTq.png") %>"
                         alt="TQ"
                         style="height: 50px; width: 50px; border-radius: 50%; margin-right: 8px;" />
-                    <span>Bitácoras Tecnosur</span>
+                    <span>Bitácora Tecnosur</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
