@@ -97,13 +97,15 @@ namespace BitacorasWeb
                 string tipoNovedad = ddlTipo.SelectedValue;
                 string descripcion = txtDescripcion.Text.Trim();
 
+                int tiempoPerdidoMin = int.Parse(txtTiempoPerdido.Text);
+
                 // 2) Crear Bitácora
                 var bitacoraDal = new BitacoraDAL();
                 int idBitacora = bitacoraDal.CrearBitacora(fecha, turno, idMaquina, idUsuario);
 
                 // 3) Insertar Novedad
                 var novedadDal = new NovedadDAL();
-                novedadDal.InsertarNovedad(idBitacora, idProducto, tipoNovedad, descripcion, null);
+                novedadDal.InsertarNovedad(idBitacora, idProducto, tipoNovedad, descripcion, tiempoPerdidoMin, null);
 
                 // 4) Mensaje OK + limpiar
                 lblMensaje.Text = "<span class='text-success'>✅ Novedad guardada correctamente.</span>";
@@ -127,6 +129,7 @@ namespace BitacorasWeb
         {
             txtFecha.Text = "";
             txtDescripcion.Text = "";
+            txtTiempoPerdido.Text = "";
 
             ddlTurno.SelectedValue = "0";
             ddlOperario.SelectedValue = "0";

@@ -9,11 +9,11 @@ namespace BitacorasWeb.Datos
 {
     public class NovedadDAL
     {
-        public void InsertarNovedad(int idBitacora, int idProducto, string tipo, string descripcion, string reportadoPor)
+        public void InsertarNovedad(int idBitacora, int idProducto, string tipo, string descripcion, int tiempoPerdidoMinutos, string reportadoPor)
         {
             const string sql = @"
-                INSERT INTO Novedad (IdBitacora, Tipo, Descripcion, ReportadoPor, Validado, IdProducto)
-                VALUES (@IdBitacora, @Tipo, @Descripcion, @ReportadoPor, 0, @IdProducto);";
+                INSERT INTO Novedad (IdBitacora, Tipo, Descripcion, ReportadoPor, Validado, IdProducto, TiempoPerdidoMinutos)
+                VALUES (@IdBitacora, @Tipo, @Descripcion, @ReportadoPor, 0, @IdProducto, @TiempoPerdidoMinutos);";
 
             using (SqlConnection conexion = ConexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand(sql, conexion))
@@ -24,6 +24,7 @@ namespace BitacorasWeb.Datos
                 comando.Parameters.Add("@ReportadoPor", SqlDbType.NVarChar, 150).Value =
                     (object)reportadoPor ?? DBNull.Value;
                 comando.Parameters.Add("@IdProducto", SqlDbType.Int).Value = idProducto;
+                comando.Parameters.Add("@TiempoPerdidoMinutos", SqlDbType.Int).Value = tiempoPerdidoMinutos;
 
                 conexion.Open();
                 comando.ExecuteNonQuery();

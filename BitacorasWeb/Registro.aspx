@@ -84,6 +84,30 @@
                     CssClass="text-danger" Display="Dynamic" />
             </div>
 
+            <!-- Tiempo perdido (min) -->
+            <div class="col-md-6">
+                <label for="txtTiempoPerdido" class="form-label">Tiempo perdido (min)</label>
+
+                <asp:TextBox ID="txtTiempoPerdido" runat="server" CssClass="form-control"
+                    TextMode="Number" placeholder="Ej: 3, 60"></asp:TextBox>
+
+                <asp:RequiredFieldValidator runat="server"
+                    ControlToValidate="txtTiempoPerdido"
+                    ErrorMessage="El tiempo perdido es obligatorio"
+                    CssClass="text-danger"
+                    Display="Dynamic" />
+
+                <asp:RangeValidator runat="server"
+                    ControlToValidate="txtTiempoPerdido"
+                    MinimumValue="0"
+                    MaximumValue="1440"
+                    Type="Integer"
+                    ErrorMessage="El tiempo perdido debe ser un número entre 0 y 1440"
+                    CssClass="text-danger"
+                    Display="Dynamic" />
+            </div>
+
+
             <!-- Descripción -->
             <div class="col-12">
                 <label for="txtDescripcion" class="form-label">Descripción</label>
