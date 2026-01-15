@@ -43,18 +43,24 @@
             <hr class="my-4" />
 
             <!-- Resultados -->
-            <asp:GridView ID="gvNovedades" runat="server" CssClass="table table-striped table-bordered"
+            <asp:GridView ID="gvNovedades" runat="server" CssClass="table table-striped table-bordered" HeaderStyle-CssClass="text-center"
                 AutoGenerateColumns="false" EmptyDataText="No hay novedades para los filtros seleccionados.">
                 <Columns>
-                    <asp:BoundField DataField="FechaHoraRegistro" HeaderText="Fecha/Hora"
-                        DataFormatString="{0:yyyy-MM-dd HH:mm}" />
-                    <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:yyyy-MM-dd}" />
-                    <asp:BoundField DataField="Turno" HeaderText="Turno" />
-                    <asp:BoundField DataField="Maquina" HeaderText="Máquina" />
-                    <asp:BoundField DataField="Producto" HeaderText="Producto" />
-                    <asp:BoundField DataField="Operario" HeaderText="Operario" />
+                    <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:yyyy-MM-dd}"
+                        HeaderStyle-Wrap="false"
+                        ItemStyle-Wrap="false" />
+                    <asp:BoundField DataField="Turno" HeaderText="Turno" ItemStyle-CssClass="text-center"
+                        HeaderStyle-Wrap="false"
+                        ItemStyle-Wrap="false" />
+                    <asp:BoundField DataField="Maquina" HeaderText="Máquina" HeaderStyle-Wrap="false"
+                        ItemStyle-Wrap="false" />
+                    <asp:BoundField DataField="Producto" HeaderText="Producto" HeaderStyle-Wrap="false"
+                        ItemStyle-Wrap="false" />
+                    <asp:BoundField DataField="Operario" HeaderText="Operario" HeaderStyle-Wrap="false"
+                        ItemStyle-Wrap="false" />
                     <asp:BoundField DataField="Tipo" HeaderText="Tipo" />
                     <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
+                    <asp:BoundField DataField="TiempoPerdidoMinutos" HeaderText="Tiempo perdido (min)" ItemStyle-CssClass="text-center" />
                 </Columns>
             </asp:GridView>
 

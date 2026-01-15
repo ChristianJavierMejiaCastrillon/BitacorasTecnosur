@@ -22,7 +22,8 @@ namespace BitacorasWeb.Datos
                     p.Nombre AS Producto,
                     (u.Nombres + ' ' + u.Apellidos) AS Operario,
                     n.Tipo,
-                    n.Descripcion
+                    n.Descripcion,
+                    n.TiempoPerdidoMinutos
                 FROM Novedad n
                 INNER JOIN Bitacora b ON b.IdBitacora = n.IdBitacora
                 INNER JOIN Maquina m ON m.IdMaquina = b.IdMaquina
@@ -75,7 +76,8 @@ namespace BitacorasWeb.Datos
                             Producto = lector["Producto"] == DBNull.Value ? "" : lector["Producto"].ToString(),
                             Operario = lector["Operario"].ToString(),
                             Tipo = lector["Tipo"].ToString(),
-                            Descripcion = lector["Descripcion"].ToString()
+                            Descripcion = lector["Descripcion"].ToString(),
+                            TiempoPerdidoMinutos = lector["TiempoPerdidoMinutos"] == DBNull.Value ? 0 : (int)lector["TiempoPerdidoMinutos"]
                         });
                     }
                 }
@@ -95,6 +97,7 @@ namespace BitacorasWeb.Datos
             public string Operario { get; set; }
             public string Tipo { get; set; }
             public string Descripcion { get; set; }
+            public int TiempoPerdidoMinutos { get; set; }
         }
     }
 }
