@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="form-container mt-4" style="max-width: 720px">
-        <%-- un poco más ancho que Login --%>
+       
         <h2 class="mb-4">Registro de Novedades</h2>
 
         <!-- Muestra de errores en bloque -->
