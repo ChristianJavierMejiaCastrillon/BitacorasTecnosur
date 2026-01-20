@@ -1,0 +1,3 @@
+ALTER TABLE Usuario
+ADD EsTurnero BIT NOT NULL CONSTRAINT DF_Usuario_EsTurnero DEFAULT 0;
+GO
