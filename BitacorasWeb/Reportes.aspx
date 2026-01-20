@@ -4,7 +4,7 @@
     <div class="container mt-4">
         <div class="card shadow-sm p-4">
 
-            <h2 class="mb-4" style="color: #0d6efd;">Reportes de Novedades</h2>
+            <h2 class="mb-4">Reportes de Novedades</h2>
 
             <asp:Label ID="lblMensaje" runat="server" EnableViewState="false"></asp:Label>
 

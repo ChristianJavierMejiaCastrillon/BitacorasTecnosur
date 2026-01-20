@@ -12,6 +12,24 @@ namespace BitacorasWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // 1) Bloqueo si no hay sesión
+            if (Session["IdUsuario"] == null)
+            {
+                Response.Redirect("~/Login.aspx");
+                return;
+            }
+
+            // 2) Bloqueo por rol (solo Operario y Admin)
+            string rol = Session["Rol"]?.ToString();
+
+            bool permitido = (rol == "Operario" || rol == "Administrador");
+
+            if (!permitido)
+            {
+                Response.Redirect("~/NoAutorizado.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
                 CargarOperarios();

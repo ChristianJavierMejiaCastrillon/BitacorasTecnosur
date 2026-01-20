@@ -11,6 +11,25 @@ namespace BitacorasWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["IdUsuario"] == null)
+            {
+                lnkRegistro.Visible = false;
+                lnkReportes.Visible = false;
+                lnkLogout.Visible = false;
+                lnkLogin.Visible = true;
+                return;
+            }
+
+            string rol = Session["Rol"]?.ToString();
+
+            lnkLogin.Visible = false;
+            lnkLogout.Visible = true;
+
+            // Registro: solo Operario y Admin
+            lnkRegistro.Visible = (rol == "Operario" || rol == "Administrador");
+
+            // Reportes: todos los roles logueados
+            lnkReportes.Visible = true;
 
         }
     }

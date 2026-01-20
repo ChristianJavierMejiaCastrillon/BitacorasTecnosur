@@ -47,10 +47,21 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navMenu">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <!--li class="nav-item"><a class="nav-link" runat="server" href="~/Home.aspx">Inicio</a></!--li-->
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Registro.aspx">Registro</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Reportes.aspx">Reportes</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Login.aspx">Login</a></li>
+                        <li class="nav-item">
+                            <a id="lnkRegistro" class="nav-link" runat="server" href="~/Registro.aspx">Registro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="lnkReportes" class="nav-link" runat="server" href="~/Reportes.aspx">Reportes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="lnkLogin" class="nav-link" runat="server" href="~/Login.aspx">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="lnkLogout" class="nav-link" runat="server" href="~/Logout.aspx">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Admin/Usuarios.aspx">Usuarios</a>
+                        </li>
                     </ul>
                 </div>
             </div>

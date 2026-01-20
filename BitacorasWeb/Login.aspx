@@ -5,8 +5,8 @@
         <h2 class="mb-4">Login</h2>
 
         <div class="mb-3">
-            <label for="txtEmail" class="form-label">Email</label>
-            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" />
+            <label for="txtUsuarioLogin" class="form-label">Usuario</label>
+            <asp:TextBox ID="txtUsuarioLogin" runat="server" CssClass="form-control" />
         </div>
 
         <div class="mb-3">
@@ -14,6 +14,7 @@
             <asp:TextBox ID="txtPass" runat="server" CssClass="form-control" TextMode="Password" />
         </div>
 
-        <asp:Button ID="btnIngresar" runat="server" CssClass="btn btn-primary" Text="Ingresar" />
+        <asp:Button ID="btnIngresar" runat="server" CssClass="btn btn-primary" 
+            Text="Ingresar" OnClick="btnIngresar_Click" />
     </div>
 </asp:Content>

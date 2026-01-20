@@ -121,6 +121,8 @@
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Logout.aspx" />
+    <Content Include="NoAutorizado.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Reportes.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -210,6 +212,20 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NoAutorizado.aspx.cs">
+      <DependentUpon>NoAutorizado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NoAutorizado.aspx.designer.cs">
+      <DependentUpon>NoAutorizado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registro.aspx.cs">
