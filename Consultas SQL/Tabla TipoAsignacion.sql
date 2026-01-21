@@ -1,0 +1,7 @@
+CREATE TABLE dbo.TipoAsignacion
+(
+    IdTipoAsignacion INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    Codigo NVARCHAR(50) NOT NULL UNIQUE,
+    Nombre NVARCHAR(80) NOT NULL,
+    Activo BIT NOT NULL DEFAULT 1
+);
