@@ -8,9 +8,9 @@ namespace BitacorasWeb.Datos
 {
     public class UsuarioDAL
     {
-        // ==============================
-        // DROPDOWN OPERARIOS 
-        // ==============================
+        // ============================================
+        // DROPDOWN OPERARIOS, TECNICOS Y COORDINADORES
+        // ============================================
         public List<UsuarioItem> ListarUsuariosParaDropdown()
         {
             var lista = new List<UsuarioItem>();
@@ -21,6 +21,7 @@ namespace BitacorasWeb.Datos
                     (Nombres + ' ' + Apellidos) AS NombreCompleto
                 FROM Usuario
                 WHERE Activo = 1
+                AND IdRol <> 1 -- <<<<<EXCLUYE ADMINISTRADORES
                 ORDER BY Nombres, Apellidos;";
 
             using (SqlConnection conexion = ConexionBD.CrearConexion())
@@ -300,7 +301,40 @@ namespace BitacorasWeb.Datos
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public bool EsAdministrador(int idUsuario)
+        {
+            const string sql = @"SELECT IdRol FROM Usuario WHERE IdUsuario = @IdUsuario;";
+
+            using (SqlConnection con = ConexionBD.CrearConexion())
+            using (SqlCommand cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                con.Open();
+
+                object result = cmd.ExecuteScalar();
+                if (result == null || result == DBNull.Value) return false;
+
+                int idRol = Convert.ToInt32(result);
+                return idRol == 1; // 1 = Administrador
+            }
+        }
+
+        public void DesactivarUsuario(int idUsuario)
+        {
+            const string sql = @"UPDATE Usuario SET Activo = 0 WHERE IdUsuario = @IdUsuario;";
+
+            using (SqlConnection con = ConexionBD.CrearConexion())
+            using (SqlCommand cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
     }
+
 
     // ==============================
     // DTO para dropdown 

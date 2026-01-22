@@ -7,83 +7,83 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace BitacorasWeb
+namespace BitacorasWeb.Admin
 {
 
 
-    public partial class SiteMaster
+    public partial class Asignaciones
     {
 
         /// <summary>
-        /// Control A1.
+        /// Control lblMsg.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
+        protected global::System.Web.UI.WebControls.Label lblMsg;
 
         /// <summary>
-        /// Control lnkRegistro.
+        /// Control ddlUsuarios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkRegistro;
+        protected global::System.Web.UI.WebControls.DropDownList ddlUsuarios;
 
         /// <summary>
-        /// Control lnkReportes.
+        /// Control ddlMaquinas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkReportes;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMaquinas;
 
         /// <summary>
-        /// Control lnkUsuarios.
+        /// Control ddlTipoAsignacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkUsuarios;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoAsignacion;
 
         /// <summary>
-        /// Control lnkAsignaciones.
+        /// Control txtFechaInicio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkAsignaciones;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaInicio;
 
         /// <summary>
-        /// Control lnkLogin.
+        /// Control btnAsignar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkLogin;
+        protected global::System.Web.UI.WebControls.Button btnAsignar;
 
         /// <summary>
-        /// Control lnkLogout.
+        /// Control btnRefrescar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkLogout;
+        protected global::System.Web.UI.WebControls.Button btnRefrescar;
 
         /// <summary>
-        /// Control MainContent.
+        /// Control gvAsignaciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.GridView gvAsignaciones;
     }
 }

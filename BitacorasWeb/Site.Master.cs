@@ -18,6 +18,7 @@ namespace BitacorasWeb
                 lnkLogout.Visible = false;
                 lnkLogin.Visible = true;
                 lnkUsuarios.Visible = false;
+                lnkAsignaciones.Visible = false;
                 return;
             }
 
@@ -34,6 +35,7 @@ namespace BitacorasWeb
 
             // Usuarios: SOLO Admin
             lnkUsuarios.Visible = (rol == "Administrador");
+            lnkAsignaciones.Visible = (rol == "Administrador");
 
         }
     }

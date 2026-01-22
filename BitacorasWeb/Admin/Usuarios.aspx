@@ -91,9 +91,17 @@
                                 <asp:LinkButton runat="server" CssClass="btn btn-sm btn-outline-warning me-1"
                                     CommandName="RESET" CommandArgument='<%# Eval("IdUsuario") %>' Text="Reset Pass" />
 
-                                <!-- Sin expresión aquí para evitar romper el parser -->
+
                                 <asp:LinkButton runat="server" CssClass="btn btn-sm btn-outline-danger"
                                     CommandName="TOGGLE" CommandArgument='<%# Eval("IdUsuario") %>' Text="Cambiar estado" />
+
+                                <asp:Button runat="server"
+                                    Text="Eliminar"
+                                    CssClass="btn btn-sm btn-danger"
+                                    CommandName="ELIMINAR"
+                                    CommandArgument='<%# Eval("IdUsuario") %>'
+                                    OnClientClick="return confirm('¿Seguro que deseas retirar este usuario? (Se desactivará y se cerrarán sus asignaciones)');" />
+
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

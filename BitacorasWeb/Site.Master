@@ -58,7 +58,10 @@
                             <a id="lnkReportes" class="nav-link" runat="server" href="~/Reportes.aspx">Reportes</a>
                         </li>
                         <li class="nav-item">
-                        <a id="lnkUsuarios" class="nav-link" runat="server" href="~/Admin/Usuarios.aspx">Usuarios</a>
+                            <a id="lnkUsuarios" class="nav-link" runat="server" href="~/Admin/Usuarios.aspx">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="lnkAsignaciones" class="nav-link" runat="server" href="~/Admin/Asignaciones.aspx">Asignaciones</a>
                         </li>
                     </ul>
 

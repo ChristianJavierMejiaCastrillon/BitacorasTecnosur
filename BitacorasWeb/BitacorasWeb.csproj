@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Asignaciones.aspx" />
     <Content Include="Admin\Usuarios.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -186,6 +187,13 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Asignaciones.aspx.cs">
+      <DependentUpon>Asignaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Asignaciones.aspx.designer.cs">
+      <DependentUpon>Asignaciones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -202,9 +210,11 @@
     <Compile Include="Datos\ProductoDAL.cs" />
     <Compile Include="Datos\ReporteNovedadesDAL.cs" />
     <Compile Include="Datos\RolDAL.cs" />
+    <Compile Include="Datos\TipoAsignacionDAL.cs" />
     <Compile Include="Datos\TipoNovedadDAL.cs" />
     <Compile Include="Datos\TurnoDAL.cs" />
     <Compile Include="Datos\UsuarioDAL.cs" />
+    <Compile Include="Datos\UsuarioMaquinaDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

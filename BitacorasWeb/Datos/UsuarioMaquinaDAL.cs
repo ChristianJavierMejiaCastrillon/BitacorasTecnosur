@@ -226,6 +226,28 @@ namespace BitacorasWeb.Datos
                 FechaFin = dr["FechaFin"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dr["FechaFin"])
             };
         }
+
+        public void FinalizarAsignacionesActivasPorUsuario(int idUsuario, DateTime fechaFin)
+        {
+            const string sql = @"
+        UPDATE dbo.UsuarioMaquina
+        SET Activo = 0,
+            FechaFin = @FechaFin
+        WHERE IdUsuario = @IdUsuario
+          AND Activo = 1
+          AND (FechaFin IS NULL OR FechaFin >= CAST(GETDATE() AS date));";
+
+            using (SqlConnection con = ConexionBD.CrearConexion())
+            using (SqlCommand cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                cmd.Parameters.AddWithValue("@FechaFin", fechaFin);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
     }
     // ================================
     // DTO: datos para grillas / listas

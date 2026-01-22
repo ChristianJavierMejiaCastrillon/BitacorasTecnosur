@@ -90,8 +90,9 @@ namespace BitacorasWeb.Datos
             return null;
         }
     }
-
+    // ============================
     // DTO para dropdown / listas
+    // ============================
     public class TipoAsignacionItem
     {
         public int IdTipoAsignacion { get; set; }

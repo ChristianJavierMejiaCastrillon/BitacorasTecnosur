@@ -163,8 +163,10 @@ namespace BitacorasWeb.Admin
 
                 lblMsg.CssClass = "text-success";
                 lblMsg.Text = "Modo edición activado.";
+                return;
             }
-            else if (e.CommandName == "RESET")
+
+            if (e.CommandName == "RESET")
             {
                 var u = _usuarioDal.ObtenerUsuarioPorId(idUsuario);
                 if (u == null) return;
@@ -173,8 +175,10 @@ namespace BitacorasWeb.Admin
 
                 lblMsg.CssClass = "text-success";
                 lblMsg.Text = "Contraseña reseteada al Código trabajador.";
+                return;
             }
-            else if (e.CommandName == "TOGGLE")
+
+            if (e.CommandName == "TOGGLE")
             {
                 _usuarioDal.ToggleActivo(idUsuario);
 
@@ -182,6 +186,31 @@ namespace BitacorasWeb.Admin
                 lblMsg.Text = "Estado Activo actualizado.";
 
                 CargarUsuarios();
+                return;
+            }
+
+            if (e.CommandName == "ELIMINAR")
+            {
+                // 1) Bloquear si es administrador
+                if (_usuarioDal.EsAdministrador(idUsuario))
+                {
+                    lblMsg.CssClass = "text-danger";
+                    lblMsg.Text = "No puedes eliminar/desactivar un usuario Administrador.";
+                    return;
+                }
+
+                // 2) Cerrar asignaciones activas
+                var umDal = new UsuarioMaquinaDAL();
+                umDal.FinalizarAsignacionesActivasPorUsuario(idUsuario, DateTime.Now);
+
+                // 3) Desactivar usuario
+                _usuarioDal.DesactivarUsuario(idUsuario);
+
+                lblMsg.CssClass = "text-success";
+                lblMsg.Text = "Usuario retirado (desactivado) correctamente.";
+
+                CargarUsuarios(); 
+                return;
             }
         }
     }
