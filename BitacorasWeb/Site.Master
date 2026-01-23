@@ -63,6 +63,9 @@
                         <li class="nav-item">
                             <a id="lnkAsignaciones" class="nav-link" runat="server" href="~/Admin/Asignaciones.aspx">Asignaciones</a>
                         </li>
+                        <li class="nav-item">
+                            <a id="lnkMaquina" class="nav-link" runat="server" href="~/Admin/Maquina.aspx">Maquinas</a>
+                        </li>
                     </ul>
 
                     <!-- DERECHA -->

@@ -1,0 +1,3 @@
+ALTER TABLE dbo.Maquina
+ADD Activo BIT NOT NULL
+CONSTRAINT DF_Maquina_Activo DEFAULT(1);
