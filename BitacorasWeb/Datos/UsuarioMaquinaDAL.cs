@@ -248,6 +248,38 @@ namespace BitacorasWeb.Datos
             }
         }
 
+        // ============================
+        // Agregar o editar modulos y elementos
+        // - Permite gestionar la estructura de una máquina
+        // ============================
+        public bool PuedeGestionarEstructura(int idUsuario, int idMaquina)
+        {
+            const string sql = @"
+        SELECT COUNT(1)
+        FROM dbo.UsuarioMaquina um
+        INNER JOIN dbo.TipoAsignacion ta ON ta.IdTipoAsignacion = um.IdTipoAsignacion
+        WHERE um.IdUsuario = @IdUsuario
+          AND um.IdMaquina = @IdMaquina
+          AND um.Activo = 1
+          AND ta.Codigo IN (
+              'COORDINADOR_MAQUINA',
+              'TEC_MECANICO_PADRINO',
+              'TEC_ELECTRICO_PADRINO'
+          );";
+
+            using (SqlConnection conexion = ConexionBD.CrearConexion())
+            using (SqlCommand comando = new SqlCommand(sql, conexion))
+            {
+                comando.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                comando.Parameters.AddWithValue("@IdMaquina", idMaquina);
+
+                conexion.Open();
+                int conteo = (int)comando.ExecuteScalar();
+                return conteo > 0;
+            }
+        }
+
+
     }
     // ================================
     // DTO: datos para grillas / listas
