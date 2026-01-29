@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\Asignaciones.aspx" />
+    <Content Include="Admin\EstructuraMaquina.aspx" />
     <Content Include="Admin\Maquina.aspx" />
     <Content Include="Admin\Usuarios.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -195,6 +196,13 @@
     <Compile Include="Admin\Asignaciones.aspx.designer.cs">
       <DependentUpon>Asignaciones.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\EstructuraMaquina.aspx.cs">
+      <DependentUpon>EstructuraMaquina.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EstructuraMaquina.aspx.designer.cs">
+      <DependentUpon>EstructuraMaquina.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Maquina.aspx.cs">
       <DependentUpon>Maquina.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -214,6 +222,8 @@
     <Compile Include="Datos\BitacoraDAL.cs" />
     <Compile Include="Datos\ConexionBD.cs" />
     <Compile Include="Datos\MaquinaDAL.cs" />
+    <Compile Include="Datos\MaquinaModuloDAL.cs" />
+    <Compile Include="Datos\MaquinaModuloElementoDAL.cs" />
     <Compile Include="Datos\NovedadDAL.cs" />
     <Compile Include="Datos\ProductoDAL.cs" />
     <Compile Include="Datos\ReporteNovedadesDAL.cs" />
