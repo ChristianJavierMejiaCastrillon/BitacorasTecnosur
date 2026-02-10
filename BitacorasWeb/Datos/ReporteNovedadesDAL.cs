@@ -26,7 +26,7 @@ namespace BitacorasWeb.Datos
                     n.TiempoPerdidoMinutos
                 FROM Novedad n
                 INNER JOIN Bitacora b ON b.IdBitacora = n.IdBitacora
-                INNER JOIN Maquina m ON m.IdMaquina = b.IdMaquina
+                INNER JOIN Maquina m ON m.IdMaquina = b.IdMaquina AND m.Activo = 1
                 LEFT JOIN Producto p ON p.IdProducto = n.IdProducto
                 INNER JOIN Usuario u ON u.IdUsuario = b.IdUsuario
                 WHERE 1 = 1
