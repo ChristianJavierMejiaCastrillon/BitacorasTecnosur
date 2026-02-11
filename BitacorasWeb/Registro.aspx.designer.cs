@@ -24,6 +24,15 @@ namespace BitacorasWeb
         protected global::System.Web.UI.WebControls.ValidationSummary vsResumen;
 
         /// <summary>
+        /// Control hfIdNovedad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdNovedad;
+
+        /// <summary>
         /// Control txtFecha.
         /// </summary>
         /// <remarks>

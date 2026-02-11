@@ -43,8 +43,14 @@
             <hr class="my-4" />
 
             <!-- Resultados -->
-            <asp:GridView ID="gvNovedades" runat="server" CssClass="table table-striped table-bordered" HeaderStyle-CssClass="text-center"
-                AutoGenerateColumns="false" EmptyDataText="No hay novedades para los filtros seleccionados.">
+            <asp:GridView ID="gvNovedades" runat="server"
+                CssClass="table table-striped table-bordered"
+                HeaderStyle-CssClass="text-center"
+                AutoGenerateColumns="false"
+                EmptyDataText="No hay novedades para los filtros seleccionados."
+                DataKeyNames="IdNovedad"
+                OnRowCommand="gvNovedades_RowCommand"
+                OnRowDataBound="gvNovedades_RowDataBound">
                 <Columns>
                     <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:yyyy-MM-dd}"
                         HeaderStyle-Wrap="false"
@@ -61,9 +67,25 @@
                     <asp:BoundField DataField="Tipo" HeaderText="Tipo" />
                     <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
                     <asp:BoundField DataField="TiempoPerdidoMinutos" HeaderText="Tiempo perdido (min)" ItemStyle-CssClass="text-center" />
+
+                    <asp:TemplateField HeaderText="Acciones" ItemStyle-CssClass="text-center" HeaderStyle-CssClass="text-center">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btnEditar" runat="server"
+                                Text="Editar"
+                                CssClass="btn btn-sm btn-warning me-1"
+                                CommandName="Editar"
+                                CommandArgument='<%# Eval("IdNovedad") %>' />
+
+                            <asp:LinkButton ID="btnEliminar" runat="server"
+                                Text="Eliminar"
+                                CssClass="btn btn-sm btn-danger"
+                                CommandName="Eliminar"
+                                CommandArgument='<%# Eval("IdNovedad") %>'
+                                OnClientClick="return confirm('¿Seguro que deseas eliminar esta novedad?');" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-
         </div>
     </div>
 </asp:Content>

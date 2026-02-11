@@ -9,6 +9,9 @@
         <asp:ValidationSummary ID="vsResumen" runat="server" CssClass="alert alert-danger"
             HeaderText="Por favor corrige los siguientes campos:" DisplayMode="BulletList" />
 
+        <asp:HiddenField ID="hfIdNovedad" runat="server" Value="0" />
+
+
         <div class="row g-3">
             <!-- Fecha -->
             <div class="col-md-6">

@@ -323,6 +323,48 @@ namespace BitacorasWeb.Datos
             return lista;
         }
 
+        // ======================================
+        // LISTAR MAQUINAS ASIGNADAS A UN OPERARIO
+        // ======================================
+        public List<MaquinaItem> ListarMaquinasAsignadasOperario(int idUsuario)
+        {
+            var lista = new List<MaquinaItem>();
+
+            const string sql = @"
+        SELECT DISTINCT m.IdMaquina, m.Nombre
+        FROM dbo.UsuarioMaquina um
+        INNER JOIN dbo.Maquina m ON m.IdMaquina = um.IdMaquina
+        INNER JOIN dbo.TipoAsignacion ta ON ta.IdTipoAsignacion = um.IdTipoAsignacion
+        WHERE um.IdUsuario = @IdUsuario
+          AND um.Activo = 1
+          AND (um.FechaFin IS NULL OR um.FechaFin >= CAST(GETDATE() AS date))
+          AND m.Activo = 1
+          AND ta.Codigo = 'OPERARIO_MAQUINA'
+        ORDER BY m.Nombre;";
+
+            using (SqlConnection cn = ConexionBD.CrearConexion())
+            using (SqlCommand cmd = new SqlCommand(sql, cn))
+            {
+                cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        lista.Add(new MaquinaItem
+                        {
+                            IdMaquina = (int)dr["IdMaquina"],
+                            Nombre = dr["Nombre"].ToString()
+                        });
+                    }
+                }
+            }
+
+            return lista;
+        }
+
+
     }
     // ================================
     // DTO: datos para grillas / listas

@@ -14,23 +14,24 @@ namespace BitacorasWeb.Datos
             var lista = new List<NovedadReporteItem>();
 
             string sql = @"
-                SELECT
-                    n.IdNovedad,
-                    b.Fecha,
-                    b.Turno,
-                    m.Nombre AS Maquina,
-                    p.Nombre AS Producto,
-                    (u.Nombres + ' ' + u.Apellidos) AS Operario,
-                    n.Tipo,
-                    n.Descripcion,
-                    n.TiempoPerdidoMinutos
-                FROM Novedad n
-                INNER JOIN Bitacora b ON b.IdBitacora = n.IdBitacora
-                INNER JOIN Maquina m ON m.IdMaquina = b.IdMaquina AND m.Activo = 1
-                LEFT JOIN Producto p ON p.IdProducto = n.IdProducto
-                INNER JOIN Usuario u ON u.IdUsuario = b.IdUsuario
-                WHERE 1 = 1
-            ";
+                            SELECT
+                                n.IdNovedad,
+                                b.Fecha,
+                                b.Turno,
+                                m.Nombre AS Maquina,
+                                p.Nombre AS Producto,
+                                (u.Nombres + ' ' + u.Apellidos) AS Operario,
+                                n.Tipo,
+                                n.Descripcion,
+                                n.TiempoPerdidoMinutos,
+                                b.IdUsuario AS IdUsuario
+                            FROM Novedad n
+                            INNER JOIN Bitacora b ON b.IdBitacora = n.IdBitacora
+                            INNER JOIN Maquina m ON m.IdMaquina = b.IdMaquina 
+                            LEFT JOIN Producto p ON p.IdProducto = n.IdProducto
+                            INNER JOIN Usuario u ON u.IdUsuario = b.IdUsuario
+                            WHERE 1 = 1
+                        ";
 
             using (SqlConnection conexion = ConexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand())
@@ -77,7 +78,11 @@ namespace BitacorasWeb.Datos
                             Operario = lector["Operario"].ToString(),
                             Tipo = lector["Tipo"].ToString(),
                             Descripcion = lector["Descripcion"].ToString(),
-                            TiempoPerdidoMinutos = lector["TiempoPerdidoMinutos"] == DBNull.Value ? 0 : (int)lector["TiempoPerdidoMinutos"]
+                            TiempoPerdidoMinutos = lector["TiempoPerdidoMinutos"] == DBNull.Value ? 0 : (int)lector["TiempoPerdidoMinutos"],
+                            IdUsuario = (int)lector["IdUsuario"],
+                            //HoraInicio = lector["HoraInicio"] == DBNull.Value ? (TimeSpan?)null : (TimeSpan)lector["HoraInicio"],
+                            //HoraFin = lector["HoraFin"] == DBNull.Value ? (TimeSpan?)null : (TimeSpan)lector["HoraFin"],
+
                         });
                     }
                 }
@@ -98,6 +103,10 @@ namespace BitacorasWeb.Datos
             public string Tipo { get; set; }
             public string Descripcion { get; set; }
             public int TiempoPerdidoMinutos { get; set; }
+            public int IdUsuario { get; set; }
+            public TimeSpan? HoraInicio { get; set; }
+            public TimeSpan? HoraFin { get; set; }
+
         }
     }
 }
