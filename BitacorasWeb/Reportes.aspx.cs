@@ -125,7 +125,7 @@ namespace BitacorasWeb
             {
                 if (e.CommandName == "Eliminar")
                 {
-                    // Regla: solo el creador y durante el turno (lo valida el SP)
+                    // Regla: durante el turno (lo valida el SP)
                     var dal = new NovedadDAL();
                     dal.EliminarNovedad(idNovedad, idUsuarioActual);
 
@@ -134,7 +134,15 @@ namespace BitacorasWeb
                 }
                 else if (e.CommandName == "Editar")
                 {
-                    Response.Redirect("~/Registro.aspx?edit=1&idNovedad=" + idNovedad);
+                    // ✅ Admin edita desde página Admin (no desde Registro)
+                    if (rol == "Administrador")
+                    {
+                        Response.Redirect("~/Admin/EditarNovedad.aspx?idNovedad=" + idNovedad);
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Registro.aspx?edit=1&idNovedad=" + idNovedad);
+                    }
                 }
             }
             catch (Exception ex)
@@ -142,6 +150,7 @@ namespace BitacorasWeb
                 lblMensaje.Text = "<div class='alert alert-danger'>❌ " + ex.Message + "</div>";
             }
         }
+
         protected void gvNovedades_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType != DataControlRowType.DataRow) return;
@@ -151,7 +160,17 @@ namespace BitacorasWeb
             var btnEditar = (LinkButton)e.Row.FindControl("btnEditar");
             var btnEliminar = (LinkButton)e.Row.FindControl("btnEliminar");
 
-            // Solo operario puede ver acciones
+            bool esAdmin = (rol == "Administrador");
+
+            // ADMIN: siempre ve acciones (el SP decide si deja o no)
+            if (esAdmin)
+            {
+                if (btnEditar != null) btnEditar.Visible = true;
+                if (btnEliminar != null) btnEliminar.Visible = true;
+                return;
+            }
+
+            // solo Operario ve acciones (por regla de turno/creador)
             if (rol != "Operario")
             {
                 if (btnEditar != null) btnEditar.Visible = false;
@@ -159,6 +178,7 @@ namespace BitacorasWeb
                 return;
             }
 
+            // Operario: solo si es creador y está dentro del turno
             int idUsuarioSesion = (int)Session["IdUsuario"];
             var item = (BitacorasWeb.Datos.ReporteNovedadesDAL.NovedadReporteItem)e.Row.DataItem;
 
@@ -170,8 +190,6 @@ namespace BitacorasWeb
             if (btnEditar != null) btnEditar.Visible = puede;
             if (btnEliminar != null) btnEliminar.Visible = puede;
         }
-
-
         private bool EstaDentroDelTurno(DateTime fecha, string turno)
         {
             DateTime inicio, fin;

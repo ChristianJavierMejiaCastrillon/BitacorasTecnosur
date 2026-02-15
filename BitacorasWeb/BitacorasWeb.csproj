@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\Asignaciones.aspx" />
+    <Content Include="Admin\EditarNovedad.aspx" />
     <Content Include="Admin\EstructuraMaquina.aspx" />
     <Content Include="Admin\Maquina.aspx" />
     <Content Include="Admin\Usuarios.aspx" />
@@ -195,6 +196,13 @@
     </Compile>
     <Compile Include="Admin\Asignaciones.aspx.designer.cs">
       <DependentUpon>Asignaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\EditarNovedad.aspx.cs">
+      <DependentUpon>EditarNovedad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EditarNovedad.aspx.designer.cs">
+      <DependentUpon>EditarNovedad.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\EstructuraMaquina.aspx.cs">
       <DependentUpon>EstructuraMaquina.aspx</DependentUpon>

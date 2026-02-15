@@ -32,16 +32,16 @@ namespace BitacorasWeb
 
             if (!IsPostBack)
             {
-                if (Request.QueryString["edit"] == "1" && int.TryParse(Request.QueryString["idNovedad"], out int idNov))
-                {
-                    CargarNovedadParaEdicion(idNov);
-                }
-
                 CargarOperarios();
                 CargarMaquinas();
                 CargarProductos();
                 CargarTurnos();
                 CargarTiposNovedad();
+
+                if (Request.QueryString["edit"] == "1" && int.TryParse(Request.QueryString["idNovedad"], out int idNov))
+                {
+                    CargarNovedadParaEdicion(idNov);
+                }
             }
         }
 
@@ -160,7 +160,7 @@ namespace BitacorasWeb
                 string descripcion = txtDescripcion.Text.Trim();
                 int tiempoPerdidoMin = int.Parse(txtTiempoPerdido.Text);
 
-                // ✅ 2) SI ES EDICIÓN: actualizar y salir (NO crear bitácora)
+                // 2) SI ES EDICIÓN: actualizar y salir (NO crear bitácora)
                 if (idNovedadEdit > 0)
                 {
                     int idUsuarioActual = (int)Session["IdUsuario"];
@@ -199,8 +199,6 @@ namespace BitacorasWeb
             }
         }
 
-
-
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
             lblMensaje.Text = "";
@@ -234,15 +232,24 @@ namespace BitacorasWeb
                 return;
             }
 
-            // Seguridad: solo Operario dueño (la regla del turno ya la controlas en Reportes y el SP)
+            // Seguridad:
+            // - Operario: solo puede editar si es el dueño
+            // - Administrador: sí puede entrar (el SP define si deja modificar/eliminar)
             int idUsuarioSesion = (int)Session["IdUsuario"];
             string rol = Session["Rol"]?.ToString();
 
-            if (rol != "Operario" || nov.IdUsuario != idUsuarioSesion)
+            if (rol == "Operario" && nov.IdUsuario != idUsuarioSesion)
             {
                 Response.Redirect("~/NoAutorizado.aspx");
                 return;
             }
+
+            if (rol != "Operario" && rol != "Administrador")
+            {
+                Response.Redirect("~/NoAutorizado.aspx");
+                return;
+            }
+
 
             // Guardar id para el postback
             hfIdNovedad.Value = nov.IdNovedad.ToString();

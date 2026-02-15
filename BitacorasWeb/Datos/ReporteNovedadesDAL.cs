@@ -90,11 +90,64 @@ namespace BitacorasWeb.Datos
 
             return lista;
         }
+        public NovedadReporteItem ObtenerPorId(int idNovedad)
+        {
+            const string sql = @"
+        SELECT
+            n.IdNovedad,
+            b.Fecha,
+            b.Turno,
+            m.Nombre AS Maquina,
+            b.IdUsuario,
+            p.IdProducto,
+            p.Nombre AS Producto,
+            (u.Nombres + ' ' + u.Apellidos) AS Operario,
+            n.Tipo,
+            n.Descripcion,
+            n.TiempoPerdidoMinutos
+        FROM dbo.Novedad n
+        INNER JOIN dbo.Bitacora b ON b.IdBitacora = n.IdBitacora
+        INNER JOIN dbo.Maquina m ON m.IdMaquina = b.IdMaquina
+        LEFT JOIN dbo.Producto p ON p.IdProducto = n.IdProducto
+        INNER JOIN dbo.Usuario u ON u.IdUsuario = b.IdUsuario
+        WHERE n.IdNovedad = @IdNovedad;
+        ";
+
+            using (SqlConnection conexion = ConexionBD.CrearConexion())
+            using (SqlCommand comando = new SqlCommand(sql, conexion))
+            {
+                comando.Parameters.Add("@IdNovedad", SqlDbType.Int).Value = idNovedad;
+
+                conexion.Open();
+                using (SqlDataReader lector = comando.ExecuteReader())
+                {
+                    if (lector.Read())
+                    {
+                        return new NovedadReporteItem
+                        {
+                            IdNovedad = (int)lector["IdNovedad"],
+                            Fecha = (DateTime)lector["Fecha"],
+                            Turno = lector["Turno"].ToString(),
+                            Maquina = lector["Maquina"].ToString(),
+                            IdProducto = lector["IdProducto"] == DBNull.Value ? 0 : (int)lector["IdProducto"],
+                            IdUsuario = (int)lector["IdUsuario"],
+                            Producto = lector["Producto"] == DBNull.Value ? "" : lector["Producto"].ToString(),
+                            Operario = lector["Operario"].ToString(),
+                            Tipo = lector["Tipo"].ToString(),
+                            Descripcion = lector["Descripcion"].ToString(),
+                            TiempoPerdidoMinutos = lector["TiempoPerdidoMinutos"] == DBNull.Value ? 0 : (int)lector["TiempoPerdidoMinutos"]
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
 
         public class NovedadReporteItem
         {
             public int IdNovedad { get; set; }
-            public DateTime FechaHoraRegistro { get; set; }
+            public int IdMaquina { get; set; }
             public DateTime Fecha { get; set; }
             public string Turno { get; set; }
             public string Maquina { get; set; }
@@ -104,9 +157,7 @@ namespace BitacorasWeb.Datos
             public string Descripcion { get; set; }
             public int TiempoPerdidoMinutos { get; set; }
             public int IdUsuario { get; set; }
-            public TimeSpan? HoraInicio { get; set; }
-            public TimeSpan? HoraFin { get; set; }
-
+            public int IdProducto { get; set; }
         }
     }
 }
