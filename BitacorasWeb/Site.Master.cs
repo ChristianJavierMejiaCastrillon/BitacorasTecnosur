@@ -21,6 +21,8 @@ namespace BitacorasWeb
                 lnkAsignaciones.Visible = false;
                 lnkMaquina.Visible = false;
                 lnkEstructuraMaquina.Visible = false;
+                lnkProductos.Visible = false;
+                lnkProductoFormulario.Visible = false;
                 return;
             }
 
@@ -41,6 +43,8 @@ namespace BitacorasWeb
             lnkUsuarios.Visible = esAdmin;
             lnkAsignaciones.Visible = esAdmin;
             lnkMaquina.Visible = esAdmin;
+            lnkProductos.Visible = esAdmin;
+            lnkProductoFormulario.Visible = esAdmin;
 
             // Estructura Máquina: Admin o (Coordinador/Padrinos con máquina asignada)
             bool puedeEstructura = esAdmin;

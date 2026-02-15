@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="form-container mt-4" style="max-width: 720px">
-       
+
         <h2 class="mb-4">Registro de Novedades</h2>
 
         <!-- Muestra de errores en bloque -->
@@ -37,19 +37,24 @@
             <!-- Máquina -->
             <div class="col-md-6">
                 <label for="ddlMaquina" class="form-label">Máquina</label>
-                <asp:DropDownList ID="ddlMaquina" runat="server" CssClass="form-select">
+
+                <asp:DropDownList ID="ddlMaquina" runat="server" CssClass="form-select"
+                    AutoPostBack="true"
+                    OnSelectedIndexChanged="ddlMaquina_SelectedIndexChanged">
                 </asp:DropDownList>
 
                 <asp:RequiredFieldValidator runat="server"
                     ControlToValidate="ddlMaquina"
                     InitialValue="0"
                     ErrorMessage="Selecciona la máquina"
-                    CssClass="text-danger" Display="Dynamic" />
+                    CssClass="text-danger"
+                    Display="Dynamic" />
             </div>
 
             <!-- Producto -->
             <div class="col-md-6">
                 <label for="ddlProducto" class="form-label">Producto</label>
+
                 <asp:DropDownList ID="ddlProducto" runat="server" CssClass="form-select">
                 </asp:DropDownList>
 
@@ -57,7 +62,8 @@
                     ControlToValidate="ddlProducto"
                     InitialValue="0"
                     ErrorMessage="Selecciona el producto"
-                    CssClass="text-danger" Display="Dynamic" />
+                    CssClass="text-danger"
+                    Display="Dynamic" />
             </div>
 
             <!-- Operario -->

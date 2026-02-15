@@ -34,7 +34,11 @@ namespace BitacorasWeb
             {
                 CargarOperarios();
                 CargarMaquinas();
-                CargarProductos();
+
+                // Deja ddlProducto en estado inicial seguro
+                ddlProducto.Items.Clear();
+                ddlProducto.Items.Insert(0, new ListItem("Seleccione...", "0"));
+
                 CargarTurnos();
                 CargarTiposNovedad();
 
@@ -95,16 +99,33 @@ namespace BitacorasWeb
             ddlMaquina.Items.Insert(0, new ListItem("Seleccione...", "0"));
         }
 
-        private void CargarProductos()
+        private void CargarProductosPorMaquina(int idMaquina)
         {
-            var dal = new ProductoDAL();
-            ddlProducto.DataSource = dal.ListarProductosParaDropdown();
+            ddlProducto.Items.Clear();
+
+            // Si no hay máquina seleccionada, no rompas: deja solo "Seleccione..."
+            if (idMaquina <= 0)
+            {
+                ddlProducto.Items.Insert(0, new ListItem("Seleccione...", "0"));
+                return;
+            }
+
+            var dal = new MaquinaProductoDAL();
+            var lista = dal.ListarProductosPorMaquina(idMaquina); // <-- FILTRADO REAL
+
+            ddlProducto.DataSource = lista;
             ddlProducto.DataTextField = "Nombre";
             ddlProducto.DataValueField = "IdProducto";
             ddlProducto.DataBind();
 
+            // Siempre agrega el placeholder al inicio
             ddlProducto.Items.Insert(0, new ListItem("Seleccione...", "0"));
+
+            // Si esa máquina no tiene productos asignados aún, no rompas:
+            // se quedará solo con "Seleccione..." y el validator te obligará a elegir cuando existan.
         }
+
+
 
         private void CargarTurnos()
         {
@@ -276,6 +297,19 @@ namespace BitacorasWeb
             ddlMaquina.Enabled = false;
             ddlOperario.Enabled = false; // ya lo bloqueas para operario, pero por si acaso
         }
+        protected void ddlMaquina_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idMaquina = int.Parse(ddlMaquina.SelectedValue);
 
+            // Si no selecciona máquina, deja producto en "Seleccione..."
+            if (idMaquina <= 0)
+            {
+                ddlProducto.Items.Clear();
+                ddlProducto.Items.Insert(0, new ListItem("Seleccione...", "0"));
+                return;
+            }
+
+            CargarProductosPorMaquina(idMaquina);
+        }
     }
 }

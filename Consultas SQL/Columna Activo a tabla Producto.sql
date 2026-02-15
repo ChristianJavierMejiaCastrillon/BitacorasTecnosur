@@ -1,0 +1,4 @@
+ALTER TABLE dbo.Producto
+ADD Activo BIT NOT NULL CONSTRAINT DF_Producto_Activo DEFAULT(1),
+    FechaAlta DATETIME NOT NULL CONSTRAINT DF_Producto_FechaAlta DEFAULT(GETDATE());
+GO

@@ -103,6 +103,8 @@
     <Content Include="Admin\EditarNovedad.aspx" />
     <Content Include="Admin\EstructuraMaquina.aspx" />
     <Content Include="Admin\Maquina.aspx" />
+    <Content Include="Admin\ProductoFormulario.aspx" />
+    <Content Include="Admin\Productos.aspx" />
     <Content Include="Admin\Usuarios.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -218,6 +220,20 @@
     <Compile Include="Admin\Maquina.aspx.designer.cs">
       <DependentUpon>Maquina.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ProductoFormulario.aspx.cs">
+      <DependentUpon>ProductoFormulario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ProductoFormulario.aspx.designer.cs">
+      <DependentUpon>ProductoFormulario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Productos.aspx.cs">
+      <DependentUpon>Productos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Productos.aspx.designer.cs">
+      <DependentUpon>Productos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -232,6 +248,7 @@
     <Compile Include="Datos\MaquinaDAL.cs" />
     <Compile Include="Datos\MaquinaModuloDAL.cs" />
     <Compile Include="Datos\MaquinaModuloElementoDAL.cs" />
+    <Compile Include="Datos\MaquinaProductoDAL.cs" />
     <Compile Include="Datos\NovedadDAL.cs" />
     <Compile Include="Datos\ProductoDAL.cs" />
     <Compile Include="Datos\ReporteNovedadesDAL.cs" />

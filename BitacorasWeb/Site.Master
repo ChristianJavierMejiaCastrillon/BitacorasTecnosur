@@ -69,6 +69,12 @@
                         <li class="nav-item">
                             <a id="lnkEstructuraMaquina" class="nav-link" runat="server" href="~/Admin/EstructuraMaquina.aspx">Estructura Maquina</a>
                         </li>
+                        <li class="nav-item">
+                            <a id="lnkProductos" class="nav-link" runat="server" href="~/Admin/Productos.aspx">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="lnkProductoFormulario" class="nav-link" runat="server" href="~/Admin/ProductoFormulario.aspx">Formulario Productos</a>
+                        </li>
                     </ul>
 
                     <!-- DERECHA -->
