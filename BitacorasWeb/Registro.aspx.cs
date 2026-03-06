@@ -125,8 +125,6 @@ namespace BitacorasWeb
             // se quedará solo con "Seleccione..." y el validator te obligará a elegir cuando existan.
         }
 
-
-
         private void CargarTurnos()
         {
             var dal = new TurnoDAL();
@@ -177,7 +175,7 @@ namespace BitacorasWeb
                 int idMaquina = int.Parse(ddlMaquina.SelectedValue);
                 int idProducto = int.Parse(ddlProducto.SelectedValue);
 
-                string tipoNovedad = ddlTipo.SelectedValue;
+                int idTipoNovedad = int.Parse(ddlTipo.SelectedValue);
                 string descripcion = txtDescripcion.Text.Trim();
                 int tiempoPerdidoMin = int.Parse(txtTiempoPerdido.Text);
 
@@ -193,7 +191,7 @@ namespace BitacorasWeb
                     novedadDal.ActualizarNovedad(
                         idNovedadEdit,
                         idUsuarioActual,
-                        tipoNovedad,
+                        idTipoNovedad,
                         descripcion,
                         idProductoNullable,
                         tiempoNullable
@@ -209,7 +207,7 @@ namespace BitacorasWeb
                 int idBitacora = bitacoraDal.CrearBitacora(fecha, turno, idMaquina, idUsuario);
 
                 var novedadDalInsert = new NovedadDAL();
-                novedadDalInsert.InsertarNovedad(idBitacora, idProducto, tipoNovedad, descripcion, tiempoPerdidoMin, null);
+                novedadDalInsert.InsertarNovedad(idBitacora, idProducto, idTipoNovedad, descripcion, tiempoPerdidoMin, null);
 
                 lblMensaje.Text = "<span class='text-success'>✅ Novedad guardada correctamente.</span>";
                 LimpiarFormulario();
@@ -283,7 +281,8 @@ namespace BitacorasWeb
             // Estos pueden venir null
             ddlProducto.SelectedValue = (nov.IdProducto.HasValue ? nov.IdProducto.Value.ToString() : "0");
 
-            ddlTipo.SelectedValue = nov.Tipo;
+            // En edición: cargar el ddlTipo con el IdTipoNovedad; si no existe, queda en "Seleccione..."
+            ddlTipo.SelectedValue = nov.IdTipoNovedad.HasValue ? nov.IdTipoNovedad.Value.ToString() : "0";
 
             txtTiempoPerdido.Text = (nov.TiempoPerdidoMinutos.HasValue ? nov.TiempoPerdidoMinutos.Value.ToString() : "");
             txtDescripcion.Text = nov.Descripcion;

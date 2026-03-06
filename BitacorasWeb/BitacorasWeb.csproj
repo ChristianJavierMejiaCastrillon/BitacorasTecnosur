@@ -105,6 +105,7 @@
     <Content Include="Admin\Maquina.aspx" />
     <Content Include="Admin\ProductoFormulario.aspx" />
     <Content Include="Admin\Productos.aspx" />
+    <Content Include="Admin\TipoNovedad.aspx" />
     <Content Include="Admin\Usuarios.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -233,6 +234,13 @@
     </Compile>
     <Compile Include="Admin\Productos.aspx.designer.cs">
       <DependentUpon>Productos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\TipoNovedad.aspx.cs">
+      <DependentUpon>TipoNovedad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\TipoNovedad.aspx.designer.cs">
+      <DependentUpon>TipoNovedad.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>

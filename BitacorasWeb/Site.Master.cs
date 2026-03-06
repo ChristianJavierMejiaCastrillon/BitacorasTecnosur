@@ -10,54 +10,73 @@ namespace BitacorasWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // 0) SIN SESIÓN
             if (Session["IdUsuario"] == null)
             {
-                lnkRegistro.Visible = false;
-                lnkReportes.Visible = false;
+                // derecha
                 lnkLogout.Visible = false;
                 lnkLogin.Visible = true;
 
-                lnkUsuarios.Visible = false;
-                lnkAsignaciones.Visible = false;
-                lnkMaquina.Visible = false;
-                lnkEstructuraMaquina.Visible = false;
-                lnkProductos.Visible = false;
-                lnkProductoFormulario.Visible = false;
+                // Menús izquierda
+                menuAdminModulos.Visible = false;  // ✅ no mostrar dropdowns
+                menuSimple.Visible = false;        // ✅ (si quieres mostrar solo Inicio, pon true y ajusta)
+
                 return;
             }
 
             string rol = Session["Rol"]?.ToString() ?? "";
             int idUsuario = Convert.ToInt32(Session["IdUsuario"]);
 
+            // derecha
             lnkLogin.Visible = false;
             lnkLogout.Visible = true;
 
-            // Registro: solo Operario y Administrador
-            lnkRegistro.Visible = (rol == "Operario" || rol == "Administrador");
-
-            // Reportes: todos los roles logueados
-            lnkReportes.Visible = true;
-
-            // Usuarios / Asignaciones / Máquinas: SOLO Administrador
             bool esAdmin = (rol == "Administrador");
-            lnkUsuarios.Visible = esAdmin;
-            lnkAsignaciones.Visible = esAdmin;
-            lnkMaquina.Visible = esAdmin;
-            lnkProductos.Visible = esAdmin;
-            lnkProductoFormulario.Visible = esAdmin;
 
-            // Estructura Máquina: Admin o (Coordinador/Padrinos con máquina asignada)
-            bool puedeEstructura = esAdmin;
+            // 1) OPERARIO: menú simple
+            if (!esAdmin)
+            {
+                menuAdminModulos.Visible = false;
+                menuSimple.Visible = true;
+
+                // Links del menú simple
+                lnkRegistro.Visible = (rol == "Operario"); // si otros roles NO deben ver Registro
+                lnkReportes.Visible = true;
+
+                return;
+            }
+
+            // 2) ADMIN: menú por módulos
+            menuSimple.Visible = false;
+            menuAdminModulos.Visible = true;
+
+            // Operación (admin)
+            lnkRegistroAdmin.Visible = true;
+            lnkReportesAdmin.Visible = true;
+
+            // Administración / Catálogos
+            lnkUsuarios.Visible = true;
+            lnkAsignaciones.Visible = true;
+            lnkMaquina.Visible = true;
+            lnkProductos.Visible = true;
+            lnkProductoFormulario.Visible = true;
+            lnkTipoNovedad.Visible = true;
+
+            // Estructura Máquina (tu regla original)
+            bool puedeEstructura = true; // admin siempre
 
             if (!puedeEstructura)
             {
-                // Si tiene al menos 1 máquina asignada como:
-                // COORDINADOR_MAQUINA / TEC_MECANICO_PADRINO / TEC_ELECTRICO_PADRINO
                 var maquinasAsignadas = _usuarioMaquinaDAL.ListarMaquinasAsignadas(idUsuario);
                 puedeEstructura = maquinasAsignadas != null && maquinasAsignadas.Count > 0;
             }
 
             lnkEstructuraMaquina.Visible = puedeEstructura;
+
+            // si algún dropdown quedara vacío, lo ocultamos
+            menuOperacion.Visible = lnkRegistroAdmin.Visible || lnkReportesAdmin.Visible;
+            menuAdministracion.Visible = lnkUsuarios.Visible || lnkAsignaciones.Visible || lnkMaquina.Visible || lnkEstructuraMaquina.Visible;
+            menuCatalogos.Visible = lnkProductos.Visible || lnkProductoFormulario.Visible || lnkTipoNovedad.Visible;
         }
     }
 }

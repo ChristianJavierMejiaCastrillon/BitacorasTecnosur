@@ -153,6 +153,7 @@ namespace BitacorasWeb.Datos
             public string Maquina { get; set; }
             public string Producto { get; set; }
             public string Operario { get; set; }
+            public int? IdTipoNovedad { get; set; }
             public string Tipo { get; set; }
             public string Descripcion { get; set; }
             public int TiempoPerdidoMinutos { get; set; }

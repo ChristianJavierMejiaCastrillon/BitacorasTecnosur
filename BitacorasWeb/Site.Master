@@ -47,9 +47,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navMenu">
                     <!-- IZQUIERDA -->
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <!-- Menú SIMPLE (Operario / no sesión) -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" runat="server" id="menuSimple">
                         <li class="nav-item">
-                            <a id="A1" class="nav-link" runat="server" href="~/Home.aspx">Inicio</a>
+                            <a id="lnkInicio" class="nav-link" runat="server" href="~/Home.aspx">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a id="lnkRegistro" class="nav-link" runat="server" href="~/Registro.aspx">Registro</a>
@@ -57,24 +59,48 @@
                         <li class="nav-item">
                             <a id="lnkReportes" class="nav-link" runat="server" href="~/Reportes.aspx">Reportes</a>
                         </li>
+                    </ul>
+
+                    <!-- Menú ADMIN (Dropdowns por módulos) -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" runat="server" id="menuAdminModulos">
+
                         <li class="nav-item">
-                            <a id="lnkUsuarios" class="nav-link" runat="server" href="~/Admin/Usuarios.aspx">Usuarios</a>
+                            <a class="nav-link" runat="server" href="~/Home.aspx">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a id="lnkAsignaciones" class="nav-link" runat="server" href="~/Admin/Asignaciones.aspx">Asignaciones</a>
+
+                        <!-- Operación -->
+                        <li class="nav-item dropdown" runat="server" id="menuOperacion">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Operación
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a id="lnkRegistroAdmin" class="dropdown-item" runat="server" href="~/Registro.aspx">Registro</a></li>
+                                <li><a id="lnkReportesAdmin" class="dropdown-item" runat="server" href="~/Reportes.aspx">Reportes</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a id="lnkMaquina" class="nav-link" runat="server" href="~/Admin/Maquina.aspx">Maquinas</a>
+
+                        <!-- Administración -->
+                        <li class="nav-item dropdown" runat="server" id="menuAdministracion">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Administración
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a id="lnkUsuarios" class="dropdown-item" runat="server" href="~/Admin/Usuarios.aspx">Usuarios</a></li>
+                                <li><a id="lnkAsignaciones" class="dropdown-item" runat="server" href="~/Admin/Asignaciones.aspx">Asignaciones</a></li>
+                                <li><a id="lnkMaquina" class="dropdown-item" runat="server" href="~/Admin/Maquina.aspx">Máquinas</a></li>
+                                <li><a id="lnkEstructuraMaquina" class="dropdown-item" runat="server" href="~/Admin/EstructuraMaquina.aspx">Estructura Máquina</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a id="lnkEstructuraMaquina" class="nav-link" runat="server" href="~/Admin/EstructuraMaquina.aspx">Estructura Maquina</a>
+
+                        <!-- Catálogos -->
+                        <li class="nav-item dropdown" runat="server" id="menuCatalogos">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catálogos
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a id="lnkProductos" class="dropdown-item" runat="server" href="~/Admin/Productos.aspx">Productos</a></li>
+                                <li><a id="lnkProductoFormulario" class="dropdown-item" runat="server" href="~/Admin/ProductoFormulario.aspx">Formulario Productos</a></li>
+                                <li><a id="lnkTipoNovedad" class="dropdown-item" runat="server" href="~/Admin/TipoNovedad.aspx">Tipos Novedades</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a id="lnkProductos" class="nav-link" runat="server" href="~/Admin/Productos.aspx">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a id="lnkProductoFormulario" class="nav-link" runat="server" href="~/Admin/ProductoFormulario.aspx">Formulario Productos</a>
-                        </li>
+
                     </ul>
 
                     <!-- DERECHA -->

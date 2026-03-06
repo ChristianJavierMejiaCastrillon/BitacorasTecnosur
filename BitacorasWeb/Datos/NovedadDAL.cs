@@ -9,28 +9,26 @@ namespace BitacorasWeb.Datos
 {
     public class NovedadDAL
     {
-        public void InsertarNovedad(int idBitacora, int idProducto, string tipo, string descripcion, int tiempoPerdidoMinutos, string reportadoPor)
+        public void InsertarNovedad(int idBitacora, int idProducto, int idTipoNovedad, string descripcion, int tiempoPerdidoMinutos, string reportadoPor)
         {
-            const string sql = @"
-                INSERT INTO Novedad (IdBitacora, Tipo, Descripcion, ReportadoPor, Validado, IdProducto, TiempoPerdidoMinutos)
-                VALUES (@IdBitacora, @Tipo, @Descripcion, @ReportadoPor, 0, @IdProducto, @TiempoPerdidoMinutos);";
-
             using (SqlConnection conexion = ConexionBD.CrearConexion())
-            using (SqlCommand comando = new SqlCommand(sql, conexion))
+            using (SqlCommand comando = new SqlCommand("dbo.sp_Novedad_Insertar", conexion))
             {
+                comando.CommandType = CommandType.StoredProcedure;
+
                 comando.Parameters.Add("@IdBitacora", SqlDbType.Int).Value = idBitacora;
-                comando.Parameters.Add("@Tipo", SqlDbType.NVarChar, 50).Value = tipo;
+                comando.Parameters.Add("@IdProducto", SqlDbType.Int).Value = idProducto;
+                comando.Parameters.Add("@IdTipoNovedad", SqlDbType.Int).Value = idTipoNovedad;
                 comando.Parameters.Add("@Descripcion", SqlDbType.NVarChar, 500).Value = descripcion;
+                comando.Parameters.Add("@TiempoPerdidoMinutos", SqlDbType.Int).Value = tiempoPerdidoMinutos;
                 comando.Parameters.Add("@ReportadoPor", SqlDbType.NVarChar, 150).Value =
                     (object)reportadoPor ?? DBNull.Value;
-                comando.Parameters.Add("@IdProducto", SqlDbType.Int).Value = idProducto;
-                comando.Parameters.Add("@TiempoPerdidoMinutos", SqlDbType.Int).Value = tiempoPerdidoMinutos;
 
                 conexion.Open();
                 comando.ExecuteNonQuery();
             }
         }
-        public void ActualizarNovedad(int idNovedad, int idUsuarioActual, string tipo, string descripcion, int? idProducto, int? tiempoPerdidoMinutos)
+        public void ActualizarNovedad(int idNovedad, int idUsuarioActual, int idTipoNovedad, string descripcion, int? idProducto, int? tiempoPerdidoMinutos)
         {
             using (SqlConnection conexion = ConexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand("dbo.sp_Novedad_Actualizar", conexion))
@@ -40,7 +38,7 @@ namespace BitacorasWeb.Datos
                 comando.Parameters.Add("@IdNovedad", SqlDbType.Int).Value = idNovedad;
                 comando.Parameters.Add("@IdUsuarioActual", SqlDbType.Int).Value = idUsuarioActual;
 
-                comando.Parameters.Add("@Tipo", SqlDbType.NVarChar, 50).Value = tipo;
+                comando.Parameters.Add("@Tipo", SqlDbType.NVarChar, 50).Value = idTipoNovedad;
                 comando.Parameters.Add("@Descripcion", SqlDbType.NVarChar, 1000).Value = descripcion;
 
                 comando.Parameters.Add("@IdProducto", SqlDbType.Int).Value = idProducto.HasValue ? (object)idProducto.Value : DBNull.Value;
@@ -50,8 +48,6 @@ namespace BitacorasWeb.Datos
                 comando.ExecuteNonQuery();
             }
         }
-
-
         public void EliminarNovedad(int idNovedad, int idUsuarioActual)
         {
             using (SqlConnection conexion = ConexionBD.CrearConexion())
@@ -122,6 +118,7 @@ namespace BitacorasWeb.Datos
             public int IdUsuario { get; set; }
 
             public int? IdProducto { get; set; }
+            public int? IdTipoNovedad { get; set; }
             public string Tipo { get; set; }
             public string Descripcion { get; set; }
             public int? TiempoPerdidoMinutos { get; set; }
