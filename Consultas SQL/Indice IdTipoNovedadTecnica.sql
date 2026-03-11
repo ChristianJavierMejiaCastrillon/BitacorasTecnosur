@@ -1,0 +1,2 @@
+CREATE INDEX IX_NovedadTecnica_IdTipoNovedadTecnica
+ON dbo.NovedadTecnica(IdTipoNovedadTecnica);

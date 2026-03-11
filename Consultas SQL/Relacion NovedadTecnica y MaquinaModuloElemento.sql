@@ -1,0 +1,4 @@
+ALTER TABLE dbo.NovedadTecnica
+ADD CONSTRAINT FK_NovedadTecnica_MaquinaModuloElemento
+FOREIGN KEY (IdMaquinaModuloElemento)
+REFERENCES dbo.MaquinaModuloElemento(IdMaquinaModuloElemento);	

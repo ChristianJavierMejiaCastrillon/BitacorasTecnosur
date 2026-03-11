@@ -33,7 +33,6 @@
             <div class="col-md-4">
                 <label class="form-label">Fecha inicio</label>
                 <asp:TextBox ID="txtFechaInicio" runat="server" CssClass="form-control" TextMode="Date" />
-                <div class="form-text">Si lo dejas vacío, se tomará hoy.</div>
             </div>
 
             <div class="col-md-4">
@@ -46,6 +45,12 @@
                 <asp:Button ID="btnRefrescar" runat="server" Text="Refrescar lista"
                     CssClass="btn btn-outline-secondary w-100"
                     OnClick="btnRefrescar_Click" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <small class="text-muted">Si lo dejas vacío, se tomará hoy.</small>
             </div>
         </div>
 

@@ -16,6 +16,20 @@ namespace BitacorasWeb.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Seguridad anti-URL (Administrador solamente)
+            if (Session["IdUsuario"] == null)
+            {
+                Response.Redirect("~/Login.aspx");
+                return;
+            }
+
+            string rolSesion = Session["Rol"]?.ToString();
+            if (rolSesion != "Administrador")
+            {
+                Response.Redirect("~/NoAutorizado.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
                 CargarUsuarios();

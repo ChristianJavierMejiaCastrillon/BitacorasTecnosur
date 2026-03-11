@@ -1,0 +1,2 @@
+CREATE INDEX IX_NovedadTecnica_IdMaquinaModuloElemento
+ON dbo.NovedadTecnica(IdMaquinaModuloElemento);
