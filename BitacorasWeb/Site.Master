@@ -54,10 +54,16 @@
                             <a id="lnkInicio" class="nav-link" runat="server" href="~/Home.aspx">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a id="lnkRegistro" class="nav-link" runat="server" href="~/Registro.aspx">Registro</a>
+                            <a id="lnkRegistro" class="nav-link" runat="server" href="~/Registro.aspx">Registro Novedades Produccion</a>
                         </li>
                         <li class="nav-item">
-                            <a id="lnkReportes" class="nav-link" runat="server" href="~/Reportes.aspx">Reportes</a>
+                            <a id="lnkReportes" class="nav-link" runat="server" href="~/Reportes.aspx">Reportes Novedades Produccion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="lnkRegistroNovedadTecnica" class="nav-link" runat="server" href="~/RegistroNovedadTecnica.aspx">Registro Novedades Técnicas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="lnkReportesNovedadTecnica" class="nav-link" runat="server" href="~/ReportesNovedadTecnica.aspx">Reportes Novedades Técnicas</a>
                         </li>
                     </ul>
 
@@ -73,8 +79,18 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Operación
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a id="lnkRegistroAdmin" class="dropdown-item" runat="server" href="~/Registro.aspx">Registro</a></li>
-                                <li><a id="lnkReportesAdmin" class="dropdown-item" runat="server" href="~/Reportes.aspx">Reportes</a></li>
+                                <li><a id="lnkRegistroAdmin" class="dropdown-item" runat="server" href="~/Registro.aspx">Registro Novedades Produccion</a></li>
+                                <li><a id="lnkReportesAdmin" class="dropdown-item" runat="server" href="~/Reportes.aspx">Reportes Novedades Produccion</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Tecnicos -->
+                        <li class="nav-item dropdown" runat="server" id="menuTecnicos">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bitacora Tecnicos
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a id="lnkRegistroNovedadTecnicaAdmin" class="dropdown-item" runat="server" href="~/RegistroNovedadTecnica.aspx">Registro Novedades Tecnicas</a></li>
+                                <li><a id="lnkReporteNovedadTecnica" class="dropdown-item" runat="server" href="~/ReportesNovedadTecnica.aspx">Reportes Novedades Tecnicas</a></li>
                             </ul>
                         </li>
 

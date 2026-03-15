@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace BitacorasWeb.Datos
 {
@@ -22,12 +19,13 @@ namespace BitacorasWeb.Datos
                 comando.Parameters.Add("@Descripcion", SqlDbType.NVarChar, 500).Value = descripcion;
                 comando.Parameters.Add("@TiempoPerdidoMinutos", SqlDbType.Int).Value = tiempoPerdidoMinutos;
                 comando.Parameters.Add("@ReportadoPor", SqlDbType.NVarChar, 150).Value =
-                    (object)reportadoPor ?? DBNull.Value;
+                    string.IsNullOrWhiteSpace(reportadoPor) ? (object)DBNull.Value : reportadoPor.Trim();
 
                 conexion.Open();
                 comando.ExecuteNonQuery();
             }
         }
+
         public void ActualizarNovedad(int idNovedad, int idUsuarioActual, int idTipoNovedad, string descripcion, int? idProducto, int? tiempoPerdidoMinutos)
         {
             using (SqlConnection conexion = ConexionBD.CrearConexion())
@@ -37,17 +35,18 @@ namespace BitacorasWeb.Datos
 
                 comando.Parameters.Add("@IdNovedad", SqlDbType.Int).Value = idNovedad;
                 comando.Parameters.Add("@IdUsuarioActual", SqlDbType.Int).Value = idUsuarioActual;
-
-                comando.Parameters.Add("@Tipo", SqlDbType.NVarChar, 50).Value = idTipoNovedad;
+                comando.Parameters.Add("@IdTipoNovedad", SqlDbType.Int).Value = idTipoNovedad;
                 comando.Parameters.Add("@Descripcion", SqlDbType.NVarChar, 1000).Value = descripcion;
-
-                comando.Parameters.Add("@IdProducto", SqlDbType.Int).Value = idProducto.HasValue ? (object)idProducto.Value : DBNull.Value;
-                comando.Parameters.Add("@TiempoPerdidoMinutos", SqlDbType.Int).Value = tiempoPerdidoMinutos.HasValue ? (object)tiempoPerdidoMinutos.Value : DBNull.Value;
+                comando.Parameters.Add("@IdProducto", SqlDbType.Int).Value =
+                    idProducto.HasValue ? (object)idProducto.Value : DBNull.Value;
+                comando.Parameters.Add("@TiempoPerdidoMinutos", SqlDbType.Int).Value =
+                    tiempoPerdidoMinutos.HasValue ? (object)tiempoPerdidoMinutos.Value : DBNull.Value;
 
                 conexion.Open();
                 comando.ExecuteNonQuery();
             }
         }
+
         public void EliminarNovedad(int idNovedad, int idUsuarioActual)
         {
             using (SqlConnection conexion = ConexionBD.CrearConexion())
@@ -66,20 +65,21 @@ namespace BitacorasWeb.Datos
         public NovedadEdicionDTO ObtenerNovedadParaEdicion(int idNovedad)
         {
             const string sql = @"
-        SELECT
-            n.IdNovedad,
-            n.IdProducto,
-            n.Tipo,
-            n.Descripcion,
-            n.TiempoPerdidoMinutos,
-            b.Fecha,
-            b.Turno,
-            b.IdMaquina,
-            b.IdUsuario
-        FROM dbo.Novedad n
-        INNER JOIN dbo.Bitacora b ON b.IdBitacora = n.IdBitacora
-        WHERE n.IdNovedad = @IdNovedad;
-    ";
+SELECT
+    n.IdNovedad,
+    n.IdProducto,
+    n.IdTipoNovedad,
+    n.Tipo,
+    n.Descripcion,
+    n.TiempoPerdidoMinutos,
+    b.Fecha,
+    b.Turno,
+    b.IdMaquina,
+    b.IdUsuario
+FROM dbo.Novedad n
+INNER JOIN dbo.Bitacora b ON b.IdBitacora = n.IdBitacora
+WHERE n.IdNovedad = @IdNovedad;
+";
 
             using (SqlConnection conexion = ConexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand(sql, conexion))
@@ -101,7 +101,8 @@ namespace BitacorasWeb.Datos
                         IdUsuario = (int)lector["IdUsuario"],
 
                         IdProducto = lector["IdProducto"] == DBNull.Value ? (int?)null : (int)lector["IdProducto"],
-                        Tipo = lector["Tipo"].ToString(),
+                        IdTipoNovedad = lector["IdTipoNovedad"] == DBNull.Value ? (int?)null : (int)lector["IdTipoNovedad"],
+                        Tipo = lector["Tipo"] == DBNull.Value ? null : lector["Tipo"].ToString(),
                         Descripcion = lector["Descripcion"].ToString(),
                         TiempoPerdidoMinutos = lector["TiempoPerdidoMinutos"] == DBNull.Value ? (int?)null : (int)lector["TiempoPerdidoMinutos"]
                     };
@@ -123,6 +124,5 @@ namespace BitacorasWeb.Datos
             public string Descripcion { get; set; }
             public int? TiempoPerdidoMinutos { get; set; }
         }
-
     }
 }

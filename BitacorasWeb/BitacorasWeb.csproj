@@ -132,7 +132,9 @@
     <Content Include="Logout.aspx" />
     <Content Include="NoAutorizado.aspx" />
     <Content Include="Registro.aspx" />
+    <Content Include="RegistroNovedadTecnica.aspx" />
     <Content Include="Reportes.aspx" />
+    <Content Include="ReportesNovedadTecnica.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -258,11 +260,14 @@
     <Compile Include="Datos\MaquinaModuloElementoDAL.cs" />
     <Compile Include="Datos\MaquinaProductoDAL.cs" />
     <Compile Include="Datos\NovedadDAL.cs" />
+    <Compile Include="Datos\NovedadTecnicaDAL.cs" />
     <Compile Include="Datos\ProductoDAL.cs" />
     <Compile Include="Datos\ReporteNovedadesDAL.cs" />
+    <Compile Include="Datos\ReporteNovedadesTecnicasDAL.cs" />
     <Compile Include="Datos\RolDAL.cs" />
     <Compile Include="Datos\TipoAsignacionDAL.cs" />
     <Compile Include="Datos\TipoNovedadDAL.cs" />
+    <Compile Include="Datos\TipoNovedadTecnicaDAL.cs" />
     <Compile Include="Datos\TurnoDAL.cs" />
     <Compile Include="Datos\UsuarioDAL.cs" />
     <Compile Include="Datos\UsuarioMaquinaDAL.cs" />
@@ -305,12 +310,26 @@
     <Compile Include="Registro.aspx.designer.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RegistroNovedadTecnica.aspx.cs">
+      <DependentUpon>RegistroNovedadTecnica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroNovedadTecnica.aspx.designer.cs">
+      <DependentUpon>RegistroNovedadTecnica.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reportes.aspx.cs">
       <DependentUpon>Reportes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Reportes.aspx.designer.cs">
       <DependentUpon>Reportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportesNovedadTecnica.aspx.cs">
+      <DependentUpon>ReportesNovedadTecnica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportesNovedadTecnica.aspx.designer.cs">
+      <DependentUpon>ReportesNovedadTecnica.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

@@ -1,27 +1,62 @@
-﻿/* ===============================
-   Paleta y estilos personalizados Tecnosur / TQ
-   =============================== */
+﻿/* =========================================================
+   TECNOSUR / TQ - ESTILOS GENERALES DEL SISTEMA
+   ========================================================= */
 
-/* --- Variables de color (ajustables según manual corporativo) --- */
+/* =========================================================
+   1. VARIABLES DE COLOR
+   ========================================================= */
 :root {
-    --tq-azul: #1e88e5; /* Azul corporativo principal */
-    --tq-azul-claro: #1e88e5; /* Azul hover o complementario */
-    --tq-gris-fondo: #f4f6f8; /* Fondo gris claro */
+    --tq-azul: #1e88e5;
+    --tq-azul-claro: #1e88e5;
+    --tq-gris-fondo: #f4f6f8;
+    --tq-gris-texto: #6c757d;
+    --tq-borde-suave: #d0d7de;
+    --tq-sombra: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Fondo general --- */
+
+/* =========================================================
+   2. ESTILOS BASE
+   ========================================================= */
 body {
     background-color: var(--tq-gris-fondo);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* --- Navbar (solo el tema --tq-azul) --- */
-/* Tu navbar es blanco y el texto azul */
+a {
+    color: var(--tq-azul);
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+
+/* =========================================================
+   3. TÍTULOS Y TEXTOS
+   ========================================================= */
+h1,
+h2,
+h3 {
+    color: var(--tq-azul);
+}
+
+/* Clase reutilizable para labels azules en todo el sistema */
+.label-tq,
+.form-label {
+    color: var(--tq-azul);
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   4. NAVBAR
+   ========================================================= */
 .navbar.--tq-azul {
     background-color: var(--tq-azul) !important;
 }
 
-    /* Texto azul TQ */
     .navbar.--tq-azul .navbar-brand,
     .navbar.--tq-azul .nav-link,
     .navbar.--tq-azul .dropdown-toggle {
@@ -39,7 +74,6 @@ body {
             text-decoration: none;
         }
 
-    /* Dropdown items */
     .navbar.--tq-azul .dropdown-menu .dropdown-item {
         color: var(--tq-azul) !important;
     }
@@ -49,12 +83,14 @@ body {
             color: var(--tq-azul) !important;
         }
 
-    /* Icono del toggle en móvil */
     .navbar.--tq-azul .navbar-toggler {
         border-color: rgba(30, 136, 229, 0.5);
     }
 
-/* --- Logo y marca navbar --- */
+
+/* =========================================================
+   5. LOGO Y MARCA
+   ========================================================= */
 .navbar-brand img {
     height: 36px;
     width: 36px;
@@ -71,7 +107,10 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* --- Botones --- */
+
+/* =========================================================
+   6. BOTONES
+   ========================================================= */
 .btn-primary {
     background-color: var(--tq-azul);
     border-color: var(--tq-azul);
@@ -82,43 +121,36 @@ body {
         border-color: var(--tq-azul-claro);
     }
 
-/* --- Títulos --- */
-h1, h2, h3 {
-    color: var(--tq-azul);
-}
 
-/* --- Footer --- */
-footer {
-    color: #6c757d;
-    text-align: center;
-}
-
-/* --- Formularios y contenedores --- */
+/* =========================================================
+   7. CONTENEDORES Y TARJETAS
+   ========================================================= */
 .container {
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--tq-sombra);
 }
 
-/* --- Enlaces generales --- */
-a {
-    color: var(--tq-azul);
-    text-decoration: none;
-}
-
-    a:hover {
-        text-decoration: underline;
+    .container hr {
+        border: none;
+        border-top: 1px solid var(--tq-borde-suave);
+        width: 80%;
+        margin: 30px auto 10px auto;
+        opacity: 0.6;
     }
 
-/* --- Formularios centrados (Login, Registro, etc.) --- */
+
+/* =========================================================
+   8. FORMULARIOS
+   ========================================================= */
 .form-container {
-    max-width: 400px; /* ancho máximo del formulario */
-    margin: 0 auto; /* centra horizontalmente */
+    max-width: 400px;
+    margin: 0 auto;
     background-color: #ffffff;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--tq-sombra);
 }
 
     .form-container .form-label {
@@ -130,11 +162,48 @@ a {
         width: 100%;
     }
 
-/* --- Línea separadora antes del footer --- */
-.container hr {
-    border: none;
-    border-top: 1px solid #d0d7de;
-    width: 80%;
-    margin: 30px auto 10px auto;
-    opacity: 0.6;
+
+/* =========================================================
+   9. FOOTER
+   ========================================================= */
+footer {
+    color: var(--tq-gris-texto);
+    text-align: center;
+}
+
+
+/* =========================================================
+   10. UTILIDADES GENERALES
+   ========================================================= */
+.no-wrap {
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   11. GRIDVIEW - REPORTES NOVEDAD TÉCNICA
+   ========================================================= */
+
+/* Centrado general del grid */
+#gvReportesNovedadTecnica th,
+#gvReportesNovedadTecnica td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Columna fecha: evitar salto de línea y darle ancho mínimo */
+#gvReportesNovedadTecnica .col-fecha {
+    white-space: nowrap;
+    min-width: 110px;
+    width: 110px;
+}
+
+/* Botones dentro del grid */
+#gvReportesNovedadTecnica .btn {
+    margin-bottom: 4px;
+}
+
+/* Mejor lectura de celdas largas */
+#gvReportesNovedadTecnica td {
+    word-break: break-word;
 }

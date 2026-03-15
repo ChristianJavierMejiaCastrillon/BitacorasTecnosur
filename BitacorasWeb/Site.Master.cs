@@ -10,16 +10,18 @@ namespace BitacorasWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // =========================
             // 0) SIN SESIÓN
+            // =========================
             if (Session["IdUsuario"] == null)
             {
                 // derecha
-                lnkLogout.Visible = false;
                 lnkLogin.Visible = true;
+                lnkLogout.Visible = false;
 
                 // Menús izquierda
-                menuAdminModulos.Visible = false;  // ✅ no mostrar dropdowns
-                menuSimple.Visible = false;        // ✅ (si quieres mostrar solo Inicio, pon true y ajusta)
+                menuSimple.Visible = false;// ✅ no mostrar dropdowns
+                menuAdminModulos.Visible = false;// ✅ (si se quiere mostrar los menus en la barra poner en true, de todas maneras si se intenta acceder a ellos pedira login)
 
                 return;
             }
@@ -31,52 +33,82 @@ namespace BitacorasWeb
             lnkLogin.Visible = false;
             lnkLogout.Visible = true;
 
-            bool esAdmin = (rol == "Administrador");
+            // =========================
+            // 1) PERMISOS POR ROL
+            // =========================
+            bool esAdmin = rol == "Administrador";
+            bool esOperario = rol == "Operario";
+            bool esCoordinador = rol == "Coordinador";
+            bool esTecnicoElectronico = rol == "TecnicoElectronico";
+            bool esTecnicoMecanico = rol == "TecnicoMecanico";
+            bool esCoordMantElectrico = rol == "CoordinadorMantenimientoElectrico";
+            bool esCoordMantMecanico = rol == "CoordinadorMantenimientoMecanico";
 
-            // 1) OPERARIO: menú simple
-            if (!esAdmin)
+            bool puedeVerRegistroOperario =
+                esAdmin || esOperario;
+
+            bool puedeVerReportesOperario =
+                esAdmin || esOperario || esCoordinador || esTecnicoElectronico || esTecnicoMecanico;
+
+            bool puedeVerRegistroTecnico =
+                esAdmin || esTecnicoElectronico || esTecnicoMecanico;
+
+            bool puedeVerReportesTecnicos =
+                esAdmin || esTecnicoElectronico || esTecnicoMecanico || esCoordMantElectrico || esCoordMantMecanico;
+
+            // =========================
+            // 2) ADMINISTRADOR
+            // =========================
+            if (esAdmin)
             {
-                menuAdminModulos.Visible = false;
-                menuSimple.Visible = true;
+                menuSimple.Visible = false;
+                menuAdminModulos.Visible = true;
 
-                // Links del menú simple
-                lnkRegistro.Visible = (rol == "Operario"); // si otros roles NO deben ver Registro
-                lnkReportes.Visible = true;
+                // Operación
+                lnkRegistroAdmin.Visible = puedeVerRegistroOperario;
+                lnkReportesAdmin.Visible = puedeVerReportesOperario;
+
+                // Bitácora técnicos
+                lnkRegistroNovedadTecnicaAdmin.Visible = puedeVerRegistroTecnico;
+                //lnkReporteNovedadTecnicaAdmin.Visible = puedeVerReportesTecnicos;
+
+                // Administración / Catálogos
+                lnkUsuarios.Visible = true;
+                lnkAsignaciones.Visible = true;
+                lnkMaquina.Visible = true;
+                lnkProductos.Visible = true;
+                lnkProductoFormulario.Visible = true;
+                lnkTipoNovedad.Visible = true;
+
+                bool puedeEstructura = true; // admin siempre
+                if (!puedeEstructura)
+                {
+                    var maquinasAsignadas = _usuarioMaquinaDAL.ListarMaquinasAsignadas(idUsuario);
+                    puedeEstructura = maquinasAsignadas != null && maquinasAsignadas.Count > 0;
+                }
+
+                lnkEstructuraMaquina.Visible = puedeEstructura;
+
+                // Ocultar dropdowns vacíos
+                menuOperacion.Visible = lnkRegistroAdmin.Visible || lnkReportesAdmin.Visible;
+                menuTecnicos.Visible = lnkRegistroNovedadTecnicaAdmin.Visible;
+                menuAdministracion.Visible = lnkUsuarios.Visible || lnkAsignaciones.Visible || lnkMaquina.Visible || lnkEstructuraMaquina.Visible;
+                menuCatalogos.Visible = lnkProductos.Visible || lnkProductoFormulario.Visible || lnkTipoNovedad.Visible;
 
                 return;
             }
 
-            // 2) ADMIN: menú por módulos
-            menuSimple.Visible = false;
-            menuAdminModulos.Visible = true;
+            // ===========================
+            // 3) DEMÁS ROLES: MENÚ SIMPLE
+            // ===========================
+            menuAdminModulos.Visible = false;
+            menuSimple.Visible = true;
 
-            // Operación (admin)
-            lnkRegistroAdmin.Visible = true;
-            lnkReportesAdmin.Visible = true;
-
-            // Administración / Catálogos
-            lnkUsuarios.Visible = true;
-            lnkAsignaciones.Visible = true;
-            lnkMaquina.Visible = true;
-            lnkProductos.Visible = true;
-            lnkProductoFormulario.Visible = true;
-            lnkTipoNovedad.Visible = true;
-
-            // Estructura Máquina (tu regla original)
-            bool puedeEstructura = true; // admin siempre
-
-            if (!puedeEstructura)
-            {
-                var maquinasAsignadas = _usuarioMaquinaDAL.ListarMaquinasAsignadas(idUsuario);
-                puedeEstructura = maquinasAsignadas != null && maquinasAsignadas.Count > 0;
-            }
-
-            lnkEstructuraMaquina.Visible = puedeEstructura;
-
-            // si algún dropdown quedara vacío, lo ocultamos
-            menuOperacion.Visible = lnkRegistroAdmin.Visible || lnkReportesAdmin.Visible;
-            menuAdministracion.Visible = lnkUsuarios.Visible || lnkAsignaciones.Visible || lnkMaquina.Visible || lnkEstructuraMaquina.Visible;
-            menuCatalogos.Visible = lnkProductos.Visible || lnkProductoFormulario.Visible || lnkTipoNovedad.Visible;
+            lnkInicio.Visible = true;
+            lnkRegistro.Visible = puedeVerRegistroOperario;
+            lnkReportes.Visible = puedeVerReportesOperario;
+            lnkRegistroNovedadTecnica.Visible = puedeVerRegistroTecnico;
+            lnkReportesNovedadTecnica.Visible = puedeVerReportesTecnicos;
         }
     }
 }
